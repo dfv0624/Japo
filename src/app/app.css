@@ -1,0 +1,74 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem 0 3rem;
+  width: 100%;
+}
+
+.app-footer {
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-medium);
+  padding: 0.85rem 1.5rem;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: var(--tablet-container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--accent-black);
+  color: var(--text-inverted);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.footer-stat {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.footer-stat strong {
+  color: var(--text-primary);
+}
+
+.footer-right {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.zen-quote {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.zen-trans {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+

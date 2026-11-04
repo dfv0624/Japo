@@ -1,0 +1,439 @@
+<div class="kana-trainer-wrapper">
+  <!-- Module Header -->
+  <div class="module-header">
+    <div>
+      <span class="type-pill">Silabarios Japoneses • 仮名</span>
+      <h2 class="module-title">Entrenamiento de Hiragana y Katakana</h2>
+      <p class="module-desc">Practica caracteres aleatorios, domina la lectura y aprende todas las excepciones fonéticas y gramaticales.</p>
+    </div>
+
+    <!-- View Mode Switcher -->
+    <div class="view-mode-tabs" role="tablist">
+      <button 
+        type="button" 
+        class="view-tab-btn" 
+        [class.active]="viewMode() === 'drill'"
+        (click)="setViewMode('drill')">
+        <span class="material-symbols-outlined">shuffle</span>
+        <span>Práctica Aleatoria</span>
+      </button>
+      <button 
+        type="button" 
+        class="view-tab-btn" 
+        [class.active]="viewMode() === 'chart'"
+        (click)="setViewMode('chart')">
+        <span class="material-symbols-outlined">grid_view</span>
+        <span>Silabario Completo</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Filters Bar -->
+  <div class="filter-bar">
+    <!-- Script Filter -->
+    <div class="filter-group">
+      <span class="filter-label">Silabario:</span>
+      <div class="filter-pills">
+        <button 
+          type="button" 
+          class="pill-btn" 
+          [class.active]="scriptFilter() === 'all'" 
+          (click)="setScriptFilter('all')">
+          Ambos
+        </button>
+        <button 
+          type="button" 
+          class="pill-btn" 
+          [class.active]="scriptFilter() === 'hiragana'" 
+          (click)="setScriptFilter('hiragana')">
+          Hiragana (ひらがな)
+        </button>
+        <button 
+          type="button" 
+          class="pill-btn" 
+          [class.active]="scriptFilter() === 'katakana'" 
+          (click)="setScriptFilter('katakana')">
+          Katakana (カタカナ)
+        </button>
+      </div>
+    </div>
+
+    <!-- Group Filter -->
+    <div class="filter-group">
+      <span class="filter-label">Grupo:</span>
+      <div class="filter-pills">
+        <button 
+          type="button" 
+          class="pill-btn" 
+          [class.active]="groupFilter() === 'all'" 
+          (click)="setGroupFilter('all')">
+          Todos
+        </button>
+        <button 
+          type="button" 
+          class="pill-btn" 
+          [class.active]="groupFilter() === 'basic'" 
+          (click)="setGroupFilter('basic')">
+          Básicos
+        </button>
+        <button 
+          type="button" 
+          class="pill-btn" 
+          [class.active]="groupFilter() === 'dakuten'" 
+          (click)="setGroupFilter('dakuten')">
+          Dakuten (゛/ ゜)
+        </button>
+        <button 
+          type="button" 
+          class="pill-btn exception-pill" 
+          [class.active]="groupFilter() === 'exceptions'" 
+          (click)="setGroupFilter('exceptions')">
+          <span class="material-symbols-outlined" style="font-size: 16px;">star</span>
+          Solo Excepciones
+        </button>
+      </div>
+    </div>
+
+    <!-- Direction (Only in Drill Mode) -->
+    @if (viewMode() === 'drill') {
+      <div class="filter-group">
+        <span class="filter-label">Modo:</span>
+        <div class="filter-pills">
+          <button 
+            type="button" 
+            class="pill-btn" 
+            [class.active]="direction() === 'kana-to-romaji'" 
+            (click)="setDirection('kana-to-romaji')">
+            Kana &rarr; Romaji
+          </button>
+          <button 
+            type="button" 
+            class="pill-btn" 
+            [class.active]="direction() === 'romaji-to-kana'" 
+            (click)="setDirection('romaji-to-kana')">
+            Romaji &rarr; Kana
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- DRILL (PRÁCTICA ALEATORIA) -->
+  @if (viewMode() === 'drill') {
+    <div class="drill-section">
+      <!-- Drill Stats Row -->
+      <div class="drill-stats-row">
+        <div class="stat-box">
+          <span class="stat-label">
+            <span class="material-symbols-outlined" style="font-size: 16px;">local_fire_department</span>
+            Racha Actual
+          </span>
+          <span class="stat-value">{{ streak() }}</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">
+            <span class="material-symbols-outlined" style="font-size: 16px;">military_tech</span>
+            Mejor Racha
+          </span>
+          <span class="stat-value">{{ bestStreak() }}</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">
+            <span class="material-symbols-outlined" style="font-size: 16px;">fact_check</span>
+            Aciertos
+          </span>
+          <span class="stat-value">{{ correctCount() }} / {{ totalAnswered() }}</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">
+            <span class="material-symbols-outlined" style="font-size: 16px;">analytics</span>
+            Precisión
+          </span>
+          <span class="stat-value">{{ accuracyRate() }}%</span>
+        </div>
+      </div>
+
+      <!-- Main Drill Flash Card -->
+      <div class="drill-card" [class.has-exception]="currentKana().isException">
+        <!-- Top Metadata -->
+        <div class="card-top-meta">
+          <span class="type-pill">{{ currentKana().type }}</span>
+          <span class="type-pill">Fila {{ currentKana().row | uppercase }}</span>
+          @if (currentKana().isException) {
+            <span class="exception-badge">
+              <span class="material-symbols-outlined" style="font-size: 14px;">priority_high</span>
+              Excepción Crítica
+            </span>
+          }
+        </div>
+
+        <!-- Prompt Display -->
+        <div class="prompt-container">
+          @if (direction() === 'kana-to-romaji') {
+            <div class="kana-big-char jp-serif">{{ currentKana().char }}</div>
+          } @else {
+            <div class="romaji-big-prompt">{{ currentKana().romaji }}</div>
+          }
+
+          <button 
+            type="button" 
+            class="audio-btn-large" 
+            (click)="playAudio(currentKana().char)" 
+            title="Escuchar pronunciación"
+            aria-label="Escuchar pronunciación">
+            <span class="material-symbols-outlined">volume_up</span>
+          </button>
+        </div>
+
+        <!-- Multiple Choice Options (4 Buttons) -->
+        <div class="choices-grid">
+          @for (opt of options(); track opt) {
+            <button 
+              type="button"
+              class="choice-btn"
+              [class.jp-font]="direction() === 'romaji-to-kana'"
+              [class.correct-choice]="isAnswered() && (direction() === 'kana-to-romaji' ? opt === currentKana().romaji : opt === currentKana().char)"
+              [class.wrong-choice]="isAnswered() && selectedOption() === opt && !isCorrect()"
+              [disabled]="isAnswered()"
+              (click)="selectOption(opt)">
+              {{ opt }}
+              @if (isAnswered() && (direction() === 'kana-to-romaji' ? opt === currentKana().romaji : opt === currentKana().char)) {
+                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+              }
+              @if (isAnswered() && selectedOption() === opt && !isCorrect()) {
+                <span class="material-symbols-outlined" style="font-size: 20px;">cancel</span>
+              }
+            </button>
+          }
+        </div>
+
+        <!-- Feedback Box -->
+        @if (isAnswered()) {
+          <div class="feedback-box">
+            <div class="feedback-headline" [class.correct]="isCorrect()" [class.wrong]="!isCorrect()">
+              <span class="material-symbols-outlined">
+                {{ isCorrect() ? 'verified' : 'info' }}
+              </span>
+              <span>
+                {{ isCorrect() ? '¡Excelente! Respuesta correcta.' : 'Respuesta correcta: ' + (direction() === 'kana-to-romaji' ? currentKana().romaji : currentKana().char) }}
+              </span>
+            </div>
+          </div>
+        }
+
+        <!-- Educational Exception Alert Card -->
+        @if (currentKana().isException && (isAnswered() || groupFilter() === 'exceptions')) {
+          <div class="exception-box">
+            <span class="material-symbols-outlined exception-icon">priority_high</span>
+            <div>
+              <div class="exception-title">Regla / Excepción a recordar</div>
+              <p class="exception-desc">{{ currentKana().exceptionNote }}</p>
+            </div>
+          </div>
+        }
+
+        <!-- Next Action Controls -->
+        <div class="drill-actions">
+          <button 
+            type="button" 
+            class="action-btn-primary" 
+            (click)="nextQuestion()">
+            <span>Siguiente Carácter</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+          <button 
+            type="button" 
+            class="action-btn-secondary" 
+            (click)="resetStats()"
+            title="Reiniciar racha y estadísticas">
+            <span class="material-symbols-outlined">restart_alt</span>
+            <span>Reiniciar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- CHART (SILABARIO COMPLETO) -->
+  @if (viewMode() === 'chart') {
+    <div class="chart-section">
+      <!-- Chart Script Tabs -->
+      <div class="chart-script-selector">
+        <button 
+          type="button" 
+          class="chart-script-btn" 
+          [class.active]="chartScript() === 'hiragana'"
+          (click)="setChartScript('hiragana')">
+          <span class="jp-serif">あ</span>
+          <span>Hiragana (ひらがな)</span>
+        </button>
+        <button 
+          type="button" 
+          class="chart-script-btn" 
+          [class.active]="chartScript() === 'katakana'"
+          (click)="setChartScript('katakana')">
+          <span class="jp-serif">ア</span>
+          <span>Katakana (カタカナ)</span>
+        </button>
+      </div>
+
+      <!-- Inspected Item Modal / Drawer -->
+      @if (inspectedKana(); as item) {
+        <div class="inspection-drawer">
+          <div class="inspection-header">
+            <span class="type-pill">{{ item.type | uppercase }} • {{ item.group }}</span>
+            <button type="button" class="action-btn-secondary" (click)="closeInspection()">
+              <span class="material-symbols-outlined">close</span>
+              <span>Cerrar</span>
+            </button>
+          </div>
+          <div class="inspection-content">
+            <div class="inspection-char jp-serif">{{ item.char }}</div>
+            <div class="inspection-details">
+              <div class="inspection-romaji">{{ item.romaji }}</div>
+              <button type="button" class="pill-btn" (click)="playAudio(item.char)" style="width: fit-content;">
+                <span class="material-symbols-outlined">volume_up</span>
+                <span>Escuchar</span>
+              </button>
+              @if (item.isException) {
+                <div class="inspection-note">
+                  <strong>Regla especial:</strong> {{ item.exceptionNote }}
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Syllabary Tables -->
+      @if (chartScript() === 'hiragana') {
+        <!-- Básicos Gojuon -->
+        <div class="chart-group-block">
+          <h3 class="chart-group-title">
+            <span class="material-symbols-outlined">apps</span>
+            Gojūon (Sonidos Básicos - 46 caracteres)
+          </h3>
+          <div class="chart-grid">
+            @for (k of hiraganaBasic(); track k.id) {
+              <div 
+                class="kana-grid-card" 
+                [class.is-exception]="k.isException"
+                (click)="inspect(k)">
+                @if (k.isException) {
+                  <span class="grid-exception-dot" title="Excepción"></span>
+                }
+                <span class="grid-kana-char jp-serif">{{ k.char }}</span>
+                <span class="grid-romaji">{{ k.romaji }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Dakuten & Handakuten -->
+        <div class="chart-group-block">
+          <h3 class="chart-group-title">
+            <span class="material-symbols-outlined">music_note</span>
+            Dakuten y Handakuten (Sonidos Sonoros ゛ y Semi-sonoros ゜)
+          </h3>
+          <div class="chart-grid">
+            @for (k of hiraganaDakuten(); track k.id) {
+              <div 
+                class="kana-grid-card" 
+                [class.is-exception]="k.isException"
+                (click)="inspect(k)">
+                @if (k.isException) {
+                  <span class="grid-exception-dot" title="Excepción"></span>
+                }
+                <span class="grid-kana-char jp-serif">{{ k.char }}</span>
+                <span class="grid-romaji">{{ k.romaji }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Excepciones y Casos Especiales -->
+        <div class="chart-group-block">
+          <h3 class="chart-group-title">
+            <span class="material-symbols-outlined">priority_high</span>
+            Casos Especiales y Excepciones de Uso
+          </h3>
+          <div class="chart-grid">
+            @for (k of hiraganaSpecial(); track k.id) {
+              <div 
+                class="kana-grid-card is-exception" 
+                (click)="inspect(k)">
+                <span class="grid-exception-dot" title="Excepción"></span>
+                <span class="grid-kana-char jp-serif">{{ k.char }}</span>
+                <span class="grid-romaji">{{ k.romaji }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      } @else {
+        <!-- Katakana Básicos -->
+        <div class="chart-group-block">
+          <h3 class="chart-group-title">
+            <span class="material-symbols-outlined">apps</span>
+            Gojūon (Katakana Básicos)
+          </h3>
+          <div class="chart-grid">
+            @for (k of katakanaBasic(); track k.id) {
+              <div 
+                class="kana-grid-card" 
+                [class.is-exception]="k.isException"
+                (click)="inspect(k)">
+                @if (k.isException) {
+                  <span class="grid-exception-dot" title="Excepción"></span>
+                }
+                <span class="grid-kana-char jp-serif">{{ k.char }}</span>
+                <span class="grid-romaji">{{ k.romaji }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Katakana Dakuten -->
+        <div class="chart-group-block">
+          <h3 class="chart-group-title">
+            <span class="material-symbols-outlined">music_note</span>
+            Dakuten y Handakuten Katakana
+          </h3>
+          <div class="chart-grid">
+            @for (k of katakanaDakuten(); track k.id) {
+              <div 
+                class="kana-grid-card" 
+                [class.is-exception]="k.isException"
+                (click)="inspect(k)">
+                @if (k.isException) {
+                  <span class="grid-exception-dot" title="Excepción"></span>
+                }
+                <span class="grid-kana-char jp-serif">{{ k.char }}</span>
+                <span class="grid-romaji">{{ k.romaji }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Katakana Especiales -->
+        <div class="chart-group-block">
+          <h3 class="chart-group-title">
+            <span class="material-symbols-outlined">priority_high</span>
+            Casos Especiales y Excepciones Katakana
+          </h3>
+          <div class="chart-grid">
+            @for (k of katakanaSpecial(); track k.id) {
+              <div 
+                class="kana-grid-card is-exception" 
+                (click)="inspect(k)">
+                <span class="grid-exception-dot" title="Excepción"></span>
+                <span class="grid-kana-char jp-serif">{{ k.char }}</span>
+                <span class="grid-romaji">{{ k.romaji }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+

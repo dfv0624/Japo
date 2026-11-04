@@ -1,0 +1,440 @@
+.tabs-nav {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-medium);
+  padding: 0.65rem 1rem;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  z-index: 50;
+}
+
+.tabs-wrapper {
+  max-width: var(--tablet-container);
+  margin: 0 auto;
+}
+
+/* ========================================================
+   SINGLE-ROW COMPACT BAR (TABLET OPTIMIZED)
+   ======================================================== */
+.single-row-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+/* LEFT: Area Dropdown Selector (Fundamentos ▾) */
+.area-dropdown-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.area-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 42px;
+  padding: 0 1.15rem;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-secondary);
+  border: 1.5px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.area-pill-btn:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--accent-black);
+}
+
+.area-pill-btn.menu-open {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.area-icon {
+  font-size: 20px;
+}
+
+.dropdown-arrow {
+  font-size: 22px;
+  margin-left: 0.15rem;
+  transition: transform 0.2s ease;
+}
+
+/* Floating Area Dropdown Menu */
+.area-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 280px;
+  background-color: var(--bg-primary);
+  border: 1.5px solid var(--accent-black);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  z-index: 100;
+  animation: dropdownFade 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.area-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.area-menu-item:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-light);
+}
+
+.area-menu-item.active {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-medium);
+}
+
+.menu-item-icon {
+  font-size: 22px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.menu-item-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.menu-item-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.menu-item-desc {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.check-icon {
+  font-size: 18px;
+  color: var(--accent-black);
+}
+
+/* CENTER: Activity Tactile Pill Buttons */
+.activities-pill-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex: 1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.1rem 0;
+}
+
+.activity-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 42px;
+  padding: 0 1.15rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-medium);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.activity-pill-btn:hover:not(.active) {
+  border-color: var(--accent-black);
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  transform: translateY(-1px);
+}
+
+.activity-pill-btn.active {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.activity-icon {
+  font-size: 19px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.activity-pill-btn.active .activity-icon {
+  color: var(--text-inverted);
+}
+
+.activity-label {
+  letter-spacing: -0.01em;
+}
+
+/* RIGHT: All Modules (Hub Launcher) Button */
+.all-modules-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 42px;
+  padding: 0 0.95rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-medium);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.all-modules-pill-btn:hover {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.all-modules-pill-btn.active {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+/* Backdrop dismisser for dropdown */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+}
+
+/* ========================================================
+   FULL MODULES LAUNCHER MODAL (9 MODULES)
+   ======================================================== */
+.launcher-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.launcher-dialog {
+  background-color: var(--bg-primary);
+  border: 2px solid var(--accent-black);
+  border-radius: 16px;
+  max-width: 880px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.launcher-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 1rem;
+}
+
+.launcher-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.launcher-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0.2rem 0 0 0;
+  color: var(--text-primary);
+}
+
+.launcher-close-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.launcher-close-btn:hover {
+  background: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.launcher-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.launcher-column-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border-medium);
+  padding-bottom: 0.4rem;
+}
+
+.launcher-column-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.launcher-item-btn {
+  padding: 0.75rem 0.85rem;
+  background-color: var(--bg-secondary);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.launcher-item-btn:hover {
+  border-color: var(--accent-black);
+  background-color: var(--bg-primary);
+  transform: translateY(-1px);
+}
+
+.launcher-item-btn.active {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.item-icon {
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.launcher-item-btn.active .item-icon {
+  color: var(--text-inverted);
+}
+
+.item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.item-jp {
+  font-size: 0.65rem;
+  font-family: var(--font-japanese);
+  color: var(--text-muted);
+}
+
+.launcher-item-btn.active .item-jp {
+  color: #A1A1AA;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ======================================================== */
+@media (max-width: 768px) {
+  .single-row-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .activities-pill-group {
+    order: 2;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .area-dropdown-wrapper {
+    order: 1;
+  }
+
+  .all-modules-pill-btn {
+    order: 1;
+  }
+
+  .launcher-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,1 +1,221 @@
-/* You can add global styles to this file, and also import other style files */
+/* Minimalist Japanese Aesthetic - Monochrome Zen Design System */
+
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F7F8;
+  --bg-tertiary: #EFEFEF;
+  --bg-subtle: #FAFAFA;
+  
+  --text-primary: #121212;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --text-inverted: #FFFFFF;
+
+  --border-light: #E8E8E8;
+  --border-medium: #D1D1D1;
+  --border-strong: #121212;
+
+  --accent-black: #000000;
+  --accent-white: #FFFFFF;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-japanese: 'Shippori Mincho', "Hiragino Mincho ProN", "Yu Mincho", serif;
+  
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  --tablet-container: 1140px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-black);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease-in-out;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--accent-black);
+  color: var(--text-inverted);
+  border: 1px solid var(--accent-black);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #262626;
+  border-color: #262626;
+}
+
+.btn-secondary {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-secondary);
+  border-color: var(--text-primary);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--accent-black);
+  background-color: var(--bg-primary);
+}
+
+.jp-text {
+  font-family: var(--font-japanese);
+  letter-spacing: 0.04em;
+}
+
+.jp-serif {
+  font-family: var(--font-japanese);
+}
+
+/* Furigana & Ruby Typography */
+ruby {
+  ruby-align: center;
+  ruby-position: over;
+  display: inline-ruby;
+}
+
+rt {
+  font-family: var(--font-sans);
+  font-size: 0.55em;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1;
+  text-align: center;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+.kanji-display rt {
+  font-size: 0.45em;
+  color: var(--text-muted);
+  display: block;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-medium);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.badge-inverted {
+  background-color: var(--accent-black);
+  color: var(--text-inverted);
+  border-color: var(--accent-black);
+}
+
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-medium);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.audio-btn:hover {
+  background: var(--accent-black);
+  color: var(--text-inverted);
+  border-color: var(--accent-black);
+}
+
+/* Google Material Symbols */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+.audio-btn .material-symbols-outlined {
+  font-size: 18px;
+}
