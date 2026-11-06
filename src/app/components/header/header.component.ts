@@ -11,13 +11,18 @@ import { DisplayMode } from '../../models/japanese.models';
     <header class="app-header">
       <div class="header-container">
         <!-- Logo and Title -->
-        <div class="branding">
+        <a 
+          href="/" 
+          class="branding" 
+          (click)="goHome($event)" 
+          title="Volver a la página principal"
+          aria-label="Volver a la página principal">
           <img ngSrc="logo.png" width="42" height="42" alt="Logo de Japo" class="app-logo" priority />
           <div class="title-wrap">
             <h1 class="app-title">みんなの日本語 <span class="sub-title">Minna no Nihongo</span></h1>
             <p class="app-desc">Aprendizaje Interactivo</p>
           </div>
-        </div>
+        </a>
 
         <!-- Central Lesson Filter -->
         <div class="lesson-selector" role="group" aria-label="Selección de Lección">
@@ -105,6 +110,28 @@ import { DisplayMode } from '../../models/japanese.models';
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: opacity 0.15s ease;
+    }
+
+    .branding:hover {
+      opacity: 0.85;
+    }
+
+    .branding:focus-visible {
+      outline: 2px solid var(--accent-black);
+      outline-offset: 3px;
+    }
+
+    .branding:hover .app-logo {
+      transform: scale(1.06);
+    }
+
+    .branding:active .app-logo {
+      transform: scale(0.96);
     }
 
     .app-logo {
@@ -113,6 +140,7 @@ import { DisplayMode } from '../../models/japanese.models';
       object-fit: contain;
       border-radius: var(--radius-sm);
       display: block;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .title-wrap {
@@ -230,6 +258,16 @@ export class HeaderComponent {
 
   setLesson(lesson: LessonFilter): void {
     this.studyProgress.setLesson(lesson);
+  }
+
+  goHome(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.studyProgress.goHome();
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }
 

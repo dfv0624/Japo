@@ -46,6 +46,10 @@ export class StudyProgressService {
     this.activeTab.set(tab);
   }
 
+  goHome(): void {
+    this.activeTab.set('flashcards');
+  }
+
   setLesson(lesson: LessonFilter): void {
     this.selectedLesson.set(lesson);
   }
