@@ -159,11 +159,23 @@ import { DisplayMode } from '../../models/japanese.models';
       border-radius: var(--radius-full);
       color: var(--text-secondary);
       background: transparent;
+      border: none;
+      cursor: pointer;
       transition: all 0.15s ease;
+    }
+
+    .filter-pill:hover:not(.active) {
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
     }
 
     .filter-pill.active {
       background-color: var(--accent-black);
+      color: var(--text-inverted);
+    }
+
+    .filter-pill.active:hover {
+      background-color: var(--accent-charcoal);
       color: var(--text-inverted);
     }
 
@@ -181,11 +193,23 @@ import { DisplayMode } from '../../models/japanese.models';
       border: 1px solid var(--border-medium);
       background-color: var(--bg-primary);
       color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .control-btn:hover:not(.active) {
+      border-color: var(--accent-black);
+      background-color: var(--bg-secondary);
     }
 
     .control-btn.active {
       border-color: var(--accent-black);
       background-color: var(--bg-tertiary);
+    }
+
+    .control-btn.active:hover {
+      border-color: var(--accent-black);
+      background-color: var(--border-light);
     }
 
     @media (max-width: 900px) {

@@ -314,7 +314,7 @@ import { DialogueScenario, DialogueLine } from '../../models/japanese.models';
       transition: all 0.15s ease;
     }
 
-    .dialogue-choice-btn:hover {
+    .dialogue-choice-btn:hover:not(.chosen) {
       border-color: var(--accent-black);
       background-color: var(--bg-secondary);
     }
@@ -322,6 +322,12 @@ import { DialogueScenario, DialogueLine } from '../../models/japanese.models';
     .dialogue-choice-btn.chosen.correct {
       background-color: var(--accent-black);
       border-color: var(--accent-black);
+      color: var(--text-inverted);
+    }
+
+    .dialogue-choice-btn.chosen.correct:hover {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
       color: var(--text-inverted);
     }
 

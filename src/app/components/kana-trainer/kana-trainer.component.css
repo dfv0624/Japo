@@ -56,10 +56,20 @@
   transition: all 0.2s ease;
 }
 
+.view-tab-btn:hover:not(.active) {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
 .view-tab-btn.active {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   box-shadow: var(--shadow-subtle);
+}
+
+.view-tab-btn.active:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* Filter Controls Bar */
@@ -110,7 +120,7 @@
   gap: 0.3rem;
 }
 
-.pill-btn:hover {
+.pill-btn:hover:not(.active) {
   border-color: var(--text-primary);
   color: var(--text-primary);
 }
@@ -121,9 +131,21 @@
   color: var(--text-inverted);
 }
 
+.pill-btn.active:hover {
+  background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
+  color: var(--text-inverted);
+}
+
 .pill-btn.exception-pill.active {
   background-color: #111111;
   border-color: #111111;
+  color: #ffffff;
+}
+
+.pill-btn.exception-pill.active:hover {
+  background-color: #262626;
+  border-color: #262626;
   color: #ffffff;
 }
 
@@ -268,6 +290,7 @@
 .audio-btn-large:hover {
   background: var(--accent-black);
   color: var(--text-inverted);
+  border-color: var(--accent-black);
   transform: scale(1.05);
 }
 
@@ -427,6 +450,8 @@
 
 .action-btn-primary:hover {
   background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
+  color: var(--text-inverted);
   transform: translateY(-1px);
 }
 
@@ -449,6 +474,8 @@
 
 .action-btn-secondary:hover {
   background-color: var(--bg-secondary);
+  border-color: var(--accent-black);
+  color: var(--text-primary);
 }
 
 /* ========================================================
@@ -482,8 +509,18 @@
   transition: all 0.2s ease;
 }
 
+.chart-script-btn:hover:not(.active) {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
 .chart-script-btn.active {
   background-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.chart-script-btn.active:hover {
+  background-color: var(--accent-charcoal);
   color: var(--text-inverted);
 }
 

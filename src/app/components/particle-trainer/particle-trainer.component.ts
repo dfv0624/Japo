@@ -245,13 +245,19 @@ import { ParticleExercise } from '../../models/japanese.models';
       transition: all 0.15s ease;
     }
 
-    .particle-btn:hover:not(:disabled) {
+    .particle-btn:hover:not(:disabled):not(.selected) {
       background-color: var(--bg-secondary);
       transform: translateY(-2px);
     }
 
     .particle-btn.selected {
       background-color: var(--accent-black);
+      color: var(--text-inverted);
+    }
+
+    .particle-btn.selected:hover:not(:disabled) {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
       color: var(--text-inverted);
     }
 

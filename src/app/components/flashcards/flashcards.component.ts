@@ -261,10 +261,21 @@ const CATEGORY_LABELS: Record<string, string> = {
       transition: all 0.15s ease;
     }
 
+    .cat-chip:hover:not(.active) {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
     .cat-chip.active {
       background-color: var(--accent-black);
       color: var(--text-inverted);
       border-color: var(--accent-black);
+    }
+
+    .cat-chip.active:hover {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
+      color: var(--text-inverted);
     }
 
     .deck-actions {
@@ -528,10 +539,23 @@ const CATEGORY_LABELS: Record<string, string> = {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .btn-master:hover:not(.is-master) {
+      background-color: var(--bg-secondary);
+      border-color: var(--accent-black);
     }
 
     .btn-master.is-master {
       background-color: var(--accent-black);
+      color: var(--text-inverted);
+      border-color: var(--accent-black);
+    }
+
+    .btn-master.is-master:hover {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
       color: var(--text-inverted);
     }
 

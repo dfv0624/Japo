@@ -215,10 +215,21 @@ const CATEGORY_LABELS: Record<string, string> = {
       transition: all 0.15s ease;
     }
 
+    .cat-chip:hover:not(.active) {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
     .cat-chip.active {
       background-color: var(--accent-black);
       color: var(--text-inverted);
       border-color: var(--accent-black);
+    }
+
+    .cat-chip.active:hover {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
+      color: var(--text-inverted);
     }
 
     .words-grid {

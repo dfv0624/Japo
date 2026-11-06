@@ -16,6 +16,7 @@
   --border-strong: #121212;
 
   --accent-black: #000000;
+  --accent-charcoal: #262626;
   --accent-white: #FFFFFF;
   
   --radius-sm: 6px;
@@ -91,8 +92,9 @@ button:disabled {
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #262626;
-  border-color: #262626;
+  background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
+  color: var(--text-inverted);
 }
 
 .btn-secondary {

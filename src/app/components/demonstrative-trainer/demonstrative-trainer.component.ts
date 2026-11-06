@@ -415,13 +415,19 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
       transition: all 0.15s ease;
     }
 
-    .option-pill:hover:not(:disabled) {
+    .option-pill:hover:not(:disabled):not(.selected) {
       background-color: var(--bg-secondary);
       transform: translateY(-2px);
     }
 
     .option-pill.selected {
       background-color: var(--accent-black);
+      color: var(--text-inverted);
+    }
+
+    .option-pill.selected:hover:not(:disabled) {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
       color: var(--text-inverted);
     }
 

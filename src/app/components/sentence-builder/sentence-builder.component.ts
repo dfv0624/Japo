@@ -311,6 +311,11 @@ import { SentenceBuilderExercise } from '../../models/japanese.models';
       border: 1px solid var(--accent-black);
     }
 
+    .token-chip.in-slot:hover {
+      background-color: var(--accent-charcoal);
+      border-color: var(--accent-charcoal);
+    }
+
     .token-rt {
       font-size: 0.62rem;
       font-weight: 500;

@@ -47,7 +47,7 @@
   white-space: nowrap;
 }
 
-.area-pill-btn:hover {
+.area-pill-btn:hover:not(.menu-open) {
   background-color: var(--bg-tertiary);
   border-color: var(--accent-black);
 }
@@ -55,6 +55,12 @@
 .area-pill-btn.menu-open {
   background-color: var(--accent-black);
   border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.area-pill-btn.menu-open:hover {
+  background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
   color: var(--text-inverted);
 }
 
@@ -183,6 +189,12 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+.activity-pill-btn.active:hover {
+  background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
+  color: var(--text-inverted);
+}
+
 .activity-icon {
   font-size: 19px;
   color: var(--text-primary);
@@ -217,8 +229,8 @@
 }
 
 .all-modules-pill-btn:hover {
-  background-color: var(--accent-black);
-  border-color: var(--accent-black);
+  background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
   color: var(--text-inverted);
 }
 
@@ -355,7 +367,7 @@
   transition: all 0.15s ease;
 }
 
-.launcher-item-btn:hover {
+.launcher-item-btn:hover:not(.active) {
   border-color: var(--accent-black);
   background-color: var(--bg-primary);
   transform: translateY(-1px);
@@ -364,6 +376,12 @@
 .launcher-item-btn.active {
   background-color: var(--accent-black);
   border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.launcher-item-btn.active:hover {
+  background-color: var(--accent-charcoal);
+  border-color: var(--accent-charcoal);
   color: var(--text-inverted);
 }
 
