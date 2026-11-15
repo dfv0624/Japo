@@ -12,7 +12,7 @@ export type ActiveTab =
   | 'grammar'
   | 'dictionary';
 
-export type LessonFilter = 1 | 2 | 0; // 0 = ambas
+export type LessonFilter = 1 | 2 | 3 | 0; // 0 = todas (1, 2, 3)
 
 const STORAGE_KEY = 'japo_learning_progress_v1';
 
@@ -20,7 +20,7 @@ const STORAGE_KEY = 'japo_learning_progress_v1';
 export class StudyProgressService {
   // Navigation & Preferences
   readonly activeTab = signal<ActiveTab>('flashcards');
-  readonly selectedLesson = signal<LessonFilter>(0); // Default: All (Lección 1 y 2)
+  readonly selectedLesson = signal<LessonFilter>(0); // Default: All (Lecciones 1, 2 y 3)
   readonly displayMode = signal<DisplayMode>('kanji'); // kanji with furigana/kana
   readonly scriptMode = signal<'furigana' | 'hiragana'>('furigana');
   readonly showRomaji = signal<boolean>(false);

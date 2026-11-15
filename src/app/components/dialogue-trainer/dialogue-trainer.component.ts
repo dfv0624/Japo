@@ -16,13 +16,13 @@ import { DialogueScenario, DialogueLine } from '../../models/japanese.models';
         </div>
 
         <div class="scenario-selector">
-          @for (scen of scenarios; track scen.id; let idx = $index) {
+          @for (scen of filteredScenarios(); track scen.id; let idx = $index) {
             <button 
               type="button" 
               class="scen-tab"
               [class.active]="selectedScenarioIndex() === idx"
               (click)="selectScenario(idx)">
-              Situación {{ idx + 1 }}
+              Situación {{ idx + 1 }} (L{{ scen.lesson }})
             </button>
           }
         </div>
@@ -385,12 +385,20 @@ export class DialogueTrainerComponent {
   protected readonly studyProgress = inject(StudyProgressService);
   protected readonly speechService = inject(SpeechService);
 
-  readonly scenarios = DIALOGUE_SCENARIOS;
   readonly selectedScenarioIndex = signal<number>(0);
   readonly chosenOptionIndex = signal<number | null>(null);
 
+  readonly filteredScenarios = computed(() => {
+    const lesson = this.studyProgress.selectedLesson();
+    if (lesson === 0) return DIALOGUE_SCENARIOS;
+    const filtered = DIALOGUE_SCENARIOS.filter(s => s.lesson === lesson);
+    return filtered.length > 0 ? filtered : DIALOGUE_SCENARIOS;
+  });
+
   readonly currentScenario = computed<DialogueScenario>(() => {
-    return this.scenarios[this.selectedScenarioIndex()];
+    const list = this.filteredScenarios();
+    const idx = Math.min(this.selectedScenarioIndex(), Math.max(0, list.length - 1));
+    return list[idx] || list[0];
   });
 
   selectScenario(idx: number): void {

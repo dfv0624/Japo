@@ -24,63 +24,75 @@ import { DisplayMode } from '../../models/japanese.models';
           </div>
         </a>
 
-        <!-- Central Lesson Filter -->
-        <div class="lesson-selector" role="group" aria-label="Selección de Lección">
-          <button 
-            type="button"
-            class="filter-pill"
-            [class.active]="studyProgress.selectedLesson() === 0"
-            (click)="setLesson(0)">
-            Todas
-          </button>
-          <button 
-            type="button"
-            class="filter-pill"
-            [class.active]="studyProgress.selectedLesson() === 1"
-            (click)="setLesson(1)">
-            Lección 1
-          </button>
-          <button 
-            type="button"
-            class="filter-pill"
-            [class.active]="studyProgress.selectedLesson() === 2"
-            (click)="setLesson(2)">
-            Lección 2
-          </button>
-        </div>
+        <!-- Right Header Area: Lessons on Top, Controls Below -->
+        <div class="header-right-area">
+          <!-- Lesson Filter (Top Row) -->
+          <div class="lesson-selector" role="group" aria-label="Selección de Lección">
+            <button 
+              type="button"
+              class="filter-pill"
+              [class.active]="studyProgress.selectedLesson() === 0"
+              (click)="setLesson(0)">
+              Todas
+            </button>
+            <button 
+              type="button"
+              class="filter-pill"
+              [class.active]="studyProgress.selectedLesson() === 1"
+              (click)="setLesson(1)">
+              Lección 1
+            </button>
+            <button 
+              type="button"
+              class="filter-pill"
+              [class.active]="studyProgress.selectedLesson() === 2"
+              (click)="setLesson(2)">
+              Lección 2
+            </button>
+            <button 
+              type="button"
+              class="filter-pill"
+              [class.active]="studyProgress.selectedLesson() === 3"
+              (click)="setLesson(3)">
+              Lección 3
+            </button>
+          </div>
 
-        <!-- Quick Controls (Audio speed, Furigana/Romaji, Stats) -->
-        <div class="header-controls">
-          <!-- Audio Speed Toggle -->
-          <button 
-            type="button" 
-            class="control-btn"
-            [class.active]="speechService.isSlow()"
-            (click)="speechService.toggleSpeed()"
-            title="Velocidad de pronunciación: {{ speechService.isSlow() ? 'Lenta (0.75x)' : 'Normal (1.0x)' }}">
-            <span class="material-symbols-outlined icon">volume_up</span>
-            <span class="btn-label">{{ speechService.isSlow() ? '0.75x Lento' : '1.0x Normal' }}</span>
-          </button>
+          <!-- Subrow: Audio, Script Mode, and Romaji Toggles on the right under the lessons -->
+          <div class="header-subrow-toggles" role="group" aria-label="Opciones de audio y lectura">
+            <!-- Audio Speed Toggle -->
+            <button 
+              type="button" 
+              class="control-btn audio-speed-btn"
+              [class.active]="speechService.isSlow()"
+              (click)="speechService.toggleSpeed()"
+              title="Velocidad de pronunciación: {{ speechService.isSlow() ? 'Lenta (0.75x)' : 'Normal (1.0x)' }}">
+              <span class="material-symbols-outlined icon">volume_up</span>
+              <span class="btn-label">{{ speechService.isSlow() ? '0.75x Lento' : '1.0x Normal' }}</span>
+            </button>
 
-          <!-- Script Mode Toggle (Furigana vs Solo Hiragana) -->
-          <button 
-            type="button" 
-            class="control-btn"
-            [class.active]="studyProgress.scriptMode() === 'hiragana'"
-            (click)="studyProgress.toggleScriptMode()"
-            title="Alternar entre Kanji con lectura Furigana arriba o Solo Hiragana">
-            <span class="btn-label">{{ studyProgress.scriptMode() === 'furigana' ? 'Kanji + Furigana' : 'Solo Hiragana' }}</span>
-          </button>
+            <!-- Script Mode Toggle (Furigana vs Solo Hiragana) -->
+            <button 
+              type="button" 
+              class="control-btn script-toggle-btn"
+              [class.active]="studyProgress.scriptMode() === 'hiragana'"
+              (click)="studyProgress.toggleScriptMode()"
+              title="Alternar entre Kanji con lectura Furigana arriba o Solo Hiragana">
+              <span class="material-symbols-outlined icon-toggle">translate</span>
+              <span class="btn-label">{{ studyProgress.scriptMode() === 'furigana' ? 'Kanji + Furigana' : 'Solo Hiragana' }}</span>
+            </button>
 
-          <!-- Romaji Toggle -->
-          <button 
-            type="button" 
-            class="control-btn"
-            [class.active]="studyProgress.showRomaji()"
-            (click)="studyProgress.toggleRomaji()"
-            title="Alternar visualización de Romaji">
-            <span class="btn-label">Romaji: {{ studyProgress.showRomaji() ? 'ON' : 'OFF' }}</span>
-          </button>
+            <!-- Romaji Toggle -->
+            <button 
+              type="button" 
+              class="control-btn romaji-toggle-btn"
+              [class.active]="studyProgress.showRomaji()"
+              (click)="studyProgress.toggleRomaji()"
+              title="Alternar visualización de Romaji">
+              <span class="material-symbols-outlined icon-toggle">font_download</span>
+              <span class="btn-label">Romaji: {{ studyProgress.showRomaji() ? 'ON' : 'OFF' }}</span>
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -207,22 +219,48 @@ import { DisplayMode } from '../../models/japanese.models';
       color: var(--text-inverted);
     }
 
-    .header-controls {
+    .header-right-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .header-subrow-toggles {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      flex-wrap: wrap;
     }
 
     .control-btn {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      padding: 0.45rem 0.8rem;
+      padding: 0.38rem 0.8rem;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-medium);
       background-color: var(--bg-primary);
       color: var(--text-primary);
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+      width: auto !important;
+      min-width: fit-content;
+      height: auto;
+      min-height: 32px;
+      box-sizing: border-box;
       transition: all 0.15s ease;
+    }
+
+    .control-btn .icon,
+    .control-btn .icon-toggle {
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .control-btn:hover:not(.active) {
@@ -233,6 +271,7 @@ import { DisplayMode } from '../../models/japanese.models';
     .control-btn.active {
       border-color: var(--accent-black);
       background-color: var(--bg-tertiary);
+      font-weight: 600;
     }
 
     .control-btn.active:hover {
@@ -244,8 +283,15 @@ import { DisplayMode } from '../../models/japanese.models';
       .header-container {
         padding: 0.75rem 1rem;
       }
+      .header-right-area {
+        width: 100%;
+        align-items: center;
+      }
       .lesson-selector {
-        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+      .header-subrow-toggles {
         width: 100%;
         justify-content: center;
       }

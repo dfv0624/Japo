@@ -17,6 +17,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   demostrativo: 'Demostrativos',
   expresion: 'Expresiones',
   lugar: 'Lugares',
+  numero: 'Números y Precios',
   otro: 'Otros'
 };
 

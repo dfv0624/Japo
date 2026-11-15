@@ -18,12 +18,12 @@ export interface KanaItem {
 
 export interface VocabularyItem {
   id: string;
-  lesson: 1 | 2;
+  lesson: 1 | 2 | 3;
   kanji?: string;
   kana: string;
   romaji: string;
   spanish: string;
-  category: 'persona' | 'profesion' | 'pais' | 'objeto' | 'lugar' | 'expresion' | 'demostrativo' | 'otro';
+  category: 'persona' | 'profesion' | 'pais' | 'objeto' | 'lugar' | 'expresion' | 'demostrativo' | 'numero' | 'otro';
   notes?: string;
   examples?: {
     jp: string;
@@ -35,7 +35,7 @@ export interface VocabularyItem {
 
 export interface GrammarPoint {
   id: string;
-  lesson: 1 | 2;
+  lesson: 1 | 2 | 3;
   pattern: string;
   title: string;
   explanation: string;
@@ -52,7 +52,7 @@ export interface GrammarPoint {
 
 export interface SentenceBuilderExercise {
   id: string;
-  lesson: 1 | 2;
+  lesson: 1 | 2 | 3;
   promptEs: string;
   targetJp: string;
   targetKana: string;
@@ -63,7 +63,7 @@ export interface SentenceBuilderExercise {
 
 export interface ParticleExercise {
   id: string;
-  lesson: 1 | 2;
+  lesson: 1 | 2 | 3;
   sentencePre: string;
   sentencePost: string;
   translation: string;
@@ -74,14 +74,14 @@ export interface ParticleExercise {
 
 export interface DemonstrativeScenario {
   id: string;
-  lesson: 2;
+  lesson: 2 | 3;
   speakerLabel: string;
   listenerLabel: string;
   objectName: string;
   objectKana: string;
   objectSpanish: string;
   distance: 'near_speaker' | 'near_listener' | 'far_both';
-  mode: 'pronoun' | 'adjective'; // これ/それ/あれ vs この/その/あの
+  mode: 'pronoun' | 'adjective' | 'place' | 'direction'; // これ/それ/あれ vs この/その/あの vs ここ/そこ/あそこ vs こちら/そちら/あちら
   contextDescription: string;
   correctAnswer: string;
   options: string[];
@@ -107,7 +107,7 @@ export interface DialogueLine {
 
 export interface DialogueScenario {
   id: string;
-  lesson: 1 | 2;
+  lesson: 1 | 2 | 3;
   title: string;
   description: string;
   lines: DialogueLine[];
@@ -115,7 +115,7 @@ export interface DialogueScenario {
 
 export interface QuizQuestion {
   id: string;
-  lesson: 1 | 2;
+  lesson: 1 | 2 | 3;
   type: 'meaning' | 'audio' | 'grammar' | 'fill_blank';
   prompt: string;
   audioText?: string;

@@ -16,7 +16,7 @@ import { QuizQuestion } from '../../models/japanese.models';
         </div>
         @if (!isCompleted()) {
           <div class="quiz-progress-badge">
-            Pregunta {{ currentQuestionIndex() + 1 }} de {{ questions().length }}
+            Pregunta {{ currentQuestionIndex() + 1 }} de {{ filteredQuestions().length }}
           </div>
         }
       </div>
@@ -102,7 +102,7 @@ import { QuizQuestion } from '../../models/japanese.models';
                 type="button" 
                 class="btn-primary" 
                 (click)="nextQuestion()">
-                {{ currentQuestionIndex() < questions().length - 1 ? 'Siguiente pregunta' : 'Ver resultados finales' }}
+                {{ currentQuestionIndex() < filteredQuestions().length - 1 ? 'Siguiente pregunta' : 'Ver resultados finales' }}
                 <span class="material-symbols-outlined">arrow_forward</span>
               </button>
             }
@@ -112,7 +112,7 @@ import { QuizQuestion } from '../../models/japanese.models';
         <!-- Completed Results Screen -->
         <div class="results-card">
           <div class="results-badge">¡Examen Completado!</div>
-          <h3 class="score-display">{{ score() }} / {{ questions().length }}</h3>
+          <h3 class="score-display">{{ score() }} / {{ filteredQuestions().length }}</h3>
           <p class="score-message">
             @if (score() >= 9) {
               ¡Sobresaliente! Has asimilado con precisión los conceptos de Minna no Nihongo.
@@ -382,19 +382,29 @@ export class QuizComponent {
   protected readonly studyProgress = inject(StudyProgressService);
   protected readonly speechService = inject(SpeechService);
 
-  readonly questions = signal<QuizQuestion[]>(QUIZ_QUESTIONS);
   readonly currentQuestionIndex = signal<number>(0);
   readonly selectedOptionIndex = signal<number | null>(null);
   readonly isAnswered = signal<boolean>(false);
   readonly score = signal<number>(0);
   readonly isCompleted = signal<boolean>(false);
 
+  readonly filteredQuestions = computed<QuizQuestion[]>(() => {
+    const lesson = this.studyProgress.selectedLesson();
+    if (lesson === 0) return QUIZ_QUESTIONS;
+    const filtered = QUIZ_QUESTIONS.filter(q => q.lesson === lesson);
+    return filtered.length > 0 ? filtered : QUIZ_QUESTIONS;
+  });
+
   readonly currentQuestion = computed<QuizQuestion>(() => {
-    return this.questions()[this.currentQuestionIndex()];
+    const list = this.filteredQuestions();
+    const idx = Math.min(this.currentQuestionIndex(), Math.max(0, list.length - 1));
+    return list[idx] || list[0];
   });
 
   readonly progressPercentage = computed(() => {
-    return ((this.currentQuestionIndex() + 1) / this.questions().length) * 100;
+    const total = this.filteredQuestions().length;
+    if (total === 0) return 0;
+    return ((this.currentQuestionIndex() + 1) / total) * 100;
   });
 
   readonly isCurrentCorrect = computed(() => {
@@ -421,7 +431,7 @@ export class QuizComponent {
   }
 
   nextQuestion(): void {
-    if (this.currentQuestionIndex() < this.questions().length - 1) {
+    if (this.currentQuestionIndex() < this.filteredQuestions().length - 1) {
       this.currentQuestionIndex.update(i => i + 1);
       this.selectedOptionIndex.set(null);
       this.isAnswered.set(false);

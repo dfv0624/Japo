@@ -10,31 +10,48 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
     <div class="demonstrative-wrapper">
       <div class="module-header">
         <div>
-          <span class="badge">Lección 2 • Sistema Ko-So-A-Do (指示詞)</span>
+          <span class="badge">Lección {{ currentScenario().lesson }} • Sistema Ko-So-A-Do (指示詞)</span>
           <h2 class="module-title">Mapa Visual de Demostrativos</h2>
           <p class="module-desc">Aprende la relación espacial según la distancia entre hablante y oyente.</p>
         </div>
         <div class="scenarios-progress">
-          {{ currentIndex() + 1 }} / {{ scenarios.length }}
+          {{ currentIndex() + 1 }} / {{ scenarios().length }}
         </div>
       </div>
 
       <!-- Theory Schema Pill Reference -->
       <div class="schema-reference-bar">
-        <div class="schema-col">
-          <span class="schema-tag">Cerca de mí (Hablante)</span>
-          <span class="schema-pair">これ / この + [Sustantivo]</span>
-        </div>
-        <div class="schema-divider">→</div>
-        <div class="schema-col">
-          <span class="schema-tag">Cerca de ti (Oyente)</span>
-          <span class="schema-pair">それ / その + [Sustantivo]</span>
-        </div>
-        <div class="schema-divider">→</div>
-        <div class="schema-col">
-          <span class="schema-tag">Lejos de ambos</span>
-          <span class="schema-pair">あれ / あの + [Sustantivo]</span>
-        </div>
+        @if (currentScenario().lesson === 3) {
+          <div class="schema-col">
+            <span class="schema-tag">Lugar del Hablante</span>
+            <span class="schema-pair">ここ / こちら (Cortés/Dirección)</span>
+          </div>
+          <div class="schema-divider">→</div>
+          <div class="schema-col">
+            <span class="schema-tag">Lugar del Oyente</span>
+            <span class="schema-pair">そこ / そちら (Cortés/Dirección)</span>
+          </div>
+          <div class="schema-divider">→</div>
+          <div class="schema-col">
+            <span class="schema-tag">Lejos de ambos</span>
+            <span class="schema-pair">あそこ / あちら (Cortés/Dirección)</span>
+          </div>
+        } @else {
+          <div class="schema-col">
+            <span class="schema-tag">Cerca de mí (Hablante)</span>
+            <span class="schema-pair">これ / この + [Sustantivo]</span>
+          </div>
+          <div class="schema-divider">→</div>
+          <div class="schema-col">
+            <span class="schema-tag">Cerca de ti (Oyente)</span>
+            <span class="schema-pair">それ / その + [Sustantivo]</span>
+          </div>
+          <div class="schema-divider">→</div>
+          <div class="schema-col">
+            <span class="schema-tag">Lejos de ambos</span>
+            <span class="schema-pair">あれ / あの + [Sustantivo]</span>
+          </div>
+        }
       </div>
 
       <div class="interactive-stage">
@@ -116,8 +133,15 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
         <!-- Scenario Context and Question -->
         <div class="scenario-context">
           <div class="mode-badge">
-            Tipo de palabra requerido: 
-            <strong>{{ currentScenario().mode === 'pronoun' ? 'Pronombre independiente (これ/それ/あれ)' : 'Modificador de sustantivo (この/その/あの + S)' }}</strong>
+            Tipo de término requerido: 
+            <strong>
+              @switch (currentScenario().mode) {
+                @case ('pronoun') { Pronombre de objeto (これ/それ/あれ) }
+                @case ('adjective') { Modificador de objeto (この/その/あの + S) }
+                @case ('place') { Indicador de lugar (ここ/そこ/あそこ) }
+                @case ('direction') { Dirección o cortesía (こちら/そちら/あちら/どちら) }
+              }
+            </strong>
           </div>
           <p class="context-text">{{ currentScenario().contextDescription }}</p>
         </div>
@@ -181,7 +205,7 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
               type="button" 
               class="btn-primary" 
               (click)="nextScenario()"
-              [disabled]="currentIndex() >= scenarios.length - 1">
+              [disabled]="currentIndex() >= scenarios().length - 1">
               Siguiente escenario
               <span class="material-symbols-outlined">arrow_forward</span>
             </button>
@@ -487,13 +511,22 @@ export class DemonstrativeTrainerComponent {
   protected readonly studyProgress = inject(StudyProgressService);
   protected readonly speechService = inject(SpeechService);
 
-  readonly scenarios = DEMONSTRATIVE_SCENARIOS;
   readonly currentIndex = signal<number>(0);
   readonly selectedOption = signal<string | null>(null);
   readonly isSubmitted = signal<boolean>(false);
 
+  readonly scenarios = computed(() => {
+    const lesson = this.studyProgress.selectedLesson();
+    if (lesson === 2 || lesson === 3) {
+      return DEMONSTRATIVE_SCENARIOS.filter(s => s.lesson === lesson);
+    }
+    return DEMONSTRATIVE_SCENARIOS;
+  });
+
   readonly currentScenario = computed<DemonstrativeScenario>(() => {
-    return this.scenarios[this.currentIndex()];
+    const list = this.scenarios();
+    const idx = Math.min(this.currentIndex(), Math.max(0, list.length - 1));
+    return list[idx] || list[0];
   });
 
   readonly isCorrect = computed(() => {
@@ -516,7 +549,7 @@ export class DemonstrativeTrainerComponent {
   }
 
   nextScenario(): void {
-    if (this.currentIndex() < this.scenarios.length - 1) {
+    if (this.currentIndex() < this.scenarios().length - 1) {
       this.currentIndex.update(i => i + 1);
       this.selectedOption.set(null);
       this.isSubmitted.set(false);

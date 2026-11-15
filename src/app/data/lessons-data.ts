@@ -512,7 +512,635 @@ export const VOCABULARY_DATA: VocabularyItem[] = [
     spanish: 'Al contrario, el gusto es mío / igualmente',
     category: 'expresion',
     notes: 'Respuesta formal y recíproca a どうぞよろしく.'
+  },
+  // LECCIÓN 3 - Lugares, Demostrativos y Comercio
+  {
+    id: 'l3-koko',
+    lesson: 3,
+    kana: 'ここ',
+    romaji: 'koko',
+    spanish: 'aquí, en este lugar',
+    category: 'lugar',
+    notes: 'Lugar donde se encuentra el hablante (o ambos si comparten territorio).',
+    examples: [
+      { jp: 'ここは 食堂です。', kana: 'ここは しょくどうです。', romaji: 'Koko wa shokudou desu.', es: 'Aquí es el comedor.' },
+      { jp: 'ここは 新大阪ですか。', kana: 'ここは しんおおさかですか。', romaji: 'Koko wa Shin-Osaka desu ka.', es: '¿Esto es Shin-Osaka?' }
+    ]
+  },
+  {
+    id: 'l3-soko',
+    lesson: 3,
+    kana: 'そこ',
+    romaji: 'soko',
+    spanish: 'ahí, en ese lugar',
+    category: 'lugar',
+    notes: 'Lugar donde se encuentra el oyente.',
+    examples: [
+      { jp: '受付は そこですか。', kana: 'うけつけは そこですか。', romaji: 'Uketsuke wa soko desu ka.', es: '¿Ahí es la recepción?' }
+    ]
+  },
+  {
+    id: 'l3-asoko',
+    lesson: 3,
+    kana: 'あそこ',
+    romaji: 'asoko',
+    spanish: 'allí, en aquel lugar',
+    category: 'lugar',
+    notes: 'Lugar distante tanto del hablante como del oyente.',
+    examples: [
+      { jp: 'お手洗いは あそこです。', kana: 'おてあらいは あそこです。', romaji: 'Otearai wa asoko desu.', es: 'El baño está allí.' },
+      { jp: 'エレベーターは あそこです。', kana: 'エレベーターは あそこです。', romaji: 'Erebeetaa wa asoko desu.', es: 'El ascensor está allí.' }
+    ]
+  },
+  {
+    id: 'l3-doko',
+    lesson: 3,
+    kana: 'どこ',
+    romaji: 'doko',
+    spanish: 'dónde, en qué lugar',
+    category: 'lugar',
+    notes: 'Pronombre interrogativo de lugar. También se usa para preguntar a qué escuela o entidad se pertenece.',
+    examples: [
+      { jp: 'トイレは どこですか。', kana: 'トイレは どこですか。', romaji: 'Toire wa doko desu ka.', es: '¿Dónde está el baño?' },
+      { jp: '学校は どこですか。', kana: 'がっこうは どこですか。', romaji: 'Gakkou wa doko desu ka.', es: '¿Cuál es el nombre de tu escuela?' }
+    ]
+  },
+  {
+    id: 'l3-kochira',
+    lesson: 3,
+    kana: 'こちら',
+    romaji: 'kochira',
+    spanish: 'por aquí, aquí (forma cortés de ここ)',
+    category: 'demostrativo',
+    notes: 'Indica dirección hacia el hablante o ubicación con mayor cortesía y respeto.',
+    examples: [
+      { jp: '電話は こちらです。', kana: 'でんわは こちらです。', romaji: 'Denwa wa kochira desu.', es: 'El teléfono está por aquí.' }
+    ]
+  },
+  {
+    id: 'l3-sochira',
+    lesson: 3,
+    kana: 'そちら',
+    romaji: 'sochira',
+    spanish: 'por ahí, ahí (forma cortés de そこ)',
+    category: 'demostrativo',
+    notes: 'Indica dirección hacia el oyente o ubicación con mayor cortesía y respeto.',
+    examples: [
+      { jp: 'エスカレーターは そちらです。', kana: 'エスカレーターは そちらです。', romaji: 'Esukareetaa wa sochira desu.', es: 'La escalera mecánica está por ahí.' }
+    ]
+  },
+  {
+    id: 'l3-achira',
+    lesson: 3,
+    kana: 'あちら',
+    romaji: 'achira',
+    spanish: 'por allí, allí (forma cortés de あそこ)',
+    category: 'demostrativo',
+    notes: 'Indica dirección a la distancia o ubicación con mayor cortesía y respeto.',
+    examples: [
+      { jp: 'エレベーターは あちらです。', kana: 'エレベーターは あちらです。', romaji: 'Erebeetaa wa achira desu.', es: 'El ascensor está por allí.' }
+    ]
+  },
+  {
+    id: 'l3-dochira',
+    lesson: 3,
+    kana: 'どちら',
+    romaji: 'dochira',
+    spanish: 'por dónde, dónde (forma cortés de どこ)',
+    category: 'demostrativo',
+    notes: 'Interrogativo de dirección y forma cortés para preguntar por ubicación, país, empresa o institución.',
+    examples: [
+      { jp: '事務所は どちらですか。', kana: 'じむしょは どちらですか。', romaji: 'Jimusho wa dochira desu ka.', es: '¿Por dónde queda la oficina?' },
+      { jp: 'お国は どちらですか。', kana: 'おくには どちらですか。', romaji: 'Okuni wa dochira desu ka.', es: '¿De qué país es usted?' }
+    ]
+  },
+  {
+    id: 'l3-kyoushitsu',
+    lesson: 3,
+    kanji: '教室',
+    kana: 'きょうしつ',
+    romaji: 'kyoushitsu',
+    spanish: 'aula, clase',
+    category: 'lugar',
+    examples: [
+      { jp: 'テレーザちゃんは 教室です。', kana: 'テレーザちゃんは きょうしつです。', romaji: 'Tereeza-chan wa kyoushitsu desu.', es: 'Teresa está en el aula.' }
+    ]
+  },
+  {
+    id: 'l3-shokudou',
+    lesson: 3,
+    kanji: '食堂',
+    kana: 'しょくどう',
+    romaji: 'shokudou',
+    spanish: 'comedor, cafetería',
+    category: 'lugar',
+    examples: [
+      { jp: '食堂は 地下です。', kana: 'しょくどうは ちかです。', romaji: 'Shokudou wa chika desu.', es: 'El comedor está en el sótano.' }
+    ]
+  },
+  {
+    id: 'l3-jimusho',
+    lesson: 3,
+    kanji: '事務所',
+    kana: 'じむしょ',
+    romaji: 'jimusho',
+    spanish: 'oficina',
+    category: 'lugar',
+    examples: [
+      { jp: '山田さんは 事務所です。', kana: 'やまださんは じむしょです。', romaji: 'Yamada-san wa jimusho desu.', es: 'El Sr. Yamada está en la oficina.' }
+    ]
+  },
+  {
+    id: 'l3-kaigishitsu',
+    lesson: 3,
+    kanji: '会議室',
+    kana: 'かいぎしつ',
+    romaji: 'kaigishitsu',
+    spanish: 'sala de reuniones',
+    category: 'lugar',
+    examples: [
+      { jp: '会議室は どこですか。', kana: 'かいぎしつは どこですか。', romaji: 'Kaigishitsu wa doko desu ka.', es: '¿Dónde está la sala de reuniones?' }
+    ]
+  },
+  {
+    id: 'l3-uketsuke',
+    lesson: 3,
+    kanji: '受付',
+    kana: 'うけつけ',
+    romaji: 'uketsuke',
+    spanish: 'recepción, mesa de informes',
+    category: 'lugar',
+    examples: [
+      { jp: '受付は あそこです。', kana: 'うけつけは あそこです。', romaji: 'Uketsuke wa asoko desu.', es: 'La recepción está allí.' }
+    ]
+  },
+  {
+    id: 'l3-robii',
+    lesson: 3,
+    kana: 'ロビー',
+    romaji: 'robii',
+    spanish: 'vestíbulo, recepción, lobby',
+    category: 'lugar',
+    examples: [
+      { jp: 'ロビーで 待っています。', kana: 'ロビーで まっています。', romaji: 'Robii de matte imasu.', es: 'Estoy esperando en el lobby.' }
+    ]
+  },
+  {
+    id: 'l3-heya',
+    lesson: 3,
+    kanji: '部屋',
+    kana: 'へや',
+    romaji: 'heya',
+    spanish: 'habitación, cuarto',
+    category: 'lugar',
+    examples: [
+      { jp: 'カリナさんの 部屋は 3階です。', kana: 'カリナさんの へやは さんがいです。', romaji: 'Karina-san no heya wa sangai desu.', es: 'La habitación de Karina está en el piso 3.' }
+    ]
+  },
+  {
+    id: 'l3-toire',
+    lesson: 3,
+    kana: 'トイレ',
+    romaji: 'toire',
+    spanish: 'baño, servicio, inodoro',
+    category: 'lugar',
+    notes: 'Término estándar tomado del inglés toilet.',
+    examples: [
+      { jp: 'トイレは どこですか。', kana: 'トイレは どこですか。', romaji: 'Toire wa doko desu ka.', es: '¿Dónde está el baño?' }
+    ]
+  },
+  {
+    id: 'l3-otearai',
+    lesson: 3,
+    kanji: 'お手洗い',
+    kana: 'おてあらい',
+    romaji: 'otearai',
+    spanish: 'baño, servicio (forma cortés)',
+    category: 'lugar',
+    notes: 'Literalmente "lavado de manos". Es más elegante y refinado que トイレ.',
+    examples: [
+      { jp: 'お手洗いは あそこです。', kana: 'おてあらいは あそこです。', romaji: 'Otearai wa asoko desu.', es: 'El servicio está allí.' }
+    ]
+  },
+  {
+    id: 'l3-kaidan',
+    lesson: 3,
+    kanji: '階段',
+    kana: 'かいだん',
+    romaji: 'kaidan',
+    spanish: 'escalera',
+    category: 'lugar',
+    examples: [
+      { jp: '階段は どちらですか。……あちらです。', kana: 'かいだんは どちらですか。……あちらです。', romaji: 'Kaidan wa dochira desu ka. ... Achira desu.', es: '¿Por dónde está la escalera? ... Por allí.' }
+    ]
+  },
+  {
+    id: 'l3-erebeetaa',
+    lesson: 3,
+    kana: 'エレベーター',
+    romaji: 'erebeetaa',
+    spanish: 'ascensor, elevador',
+    category: 'objeto',
+    examples: [
+      { jp: 'エレベーターは あそこです。', kana: 'エレベーターは あそこです。', romaji: 'Erebeetaa wa asoko desu.', es: 'El ascensor está allí.' }
+    ]
+  },
+  {
+    id: 'l3-esukareetaa',
+    lesson: 3,
+    kana: 'エスカレーター',
+    romaji: 'esukareetaa',
+    spanish: 'escalera mecánica',
+    category: 'objeto',
+    examples: [
+      { jp: 'エスカレーターは そちらです。', kana: 'エスカレーターは そちらです。', romaji: 'Esukareetaa wa sochira desu.', es: 'La escalera mecánica está por ahí.' }
+    ]
+  },
+  {
+    id: 'l3-jidouhanbaiki',
+    lesson: 3,
+    kanji: '自動販売機',
+    kana: 'じどうはんばいき',
+    romaji: 'jidouhanbaiki',
+    spanish: 'máquina de venta automática, expendedora',
+    category: 'objeto',
+    examples: [
+      { jp: '自動販売機は 2階です。', kana: 'じどうはんばいきは にかいです。', romaji: 'Jidouhanbaiki wa nikai desu.', es: 'La máquina expendedora está en el 2º piso.' }
+    ]
+  },
+  {
+    id: 'l3-denwa',
+    lesson: 3,
+    kanji: '電話',
+    kana: 'でんわ',
+    romaji: 'denwa',
+    spanish: 'teléfono, llamada telefónica',
+    category: 'objeto',
+    examples: [
+      { jp: '電話は こちらです。', kana: 'でんわは こちらです。', romaji: 'Denwa wa kochira desu.', es: 'El teléfono está por aquí.' }
+    ]
+  },
+  {
+    id: 'l3-okuni',
+    lesson: 3,
+    kanji: '［お］国',
+    kana: '［お］くに',
+    romaji: '[o]kuni',
+    spanish: '[su] país, patria',
+    category: 'pais',
+    notes: 'Lleva el prefijo de cortesía お para dirigirse al país del interlocutor.',
+    examples: [
+      { jp: 'お国は どちらですか。……アメリカです。', kana: 'おくには どちらですか。……アメリカです。', romaji: 'Okuni wa dochira desu ka. ... Amerika desu.', es: '¿De qué país es usted? ... De Estados Unidos.' }
+    ]
+  },
+  {
+    id: 'l3-kaisha',
+    lesson: 3,
+    kanji: '会社',
+    kana: 'かいしゃ',
+    romaji: 'kaisha',
+    spanish: 'empresa, compañía, firma',
+    category: 'lugar',
+    examples: [
+      { jp: '会社は どちらですか。', kana: 'かいしゃは どちらですか。', romaji: 'Kaisha wa dochira desu ka.', es: '¿En qué empresa trabaja usted?' }
+    ]
+  },
+  {
+    id: 'l3-uchi',
+    lesson: 3,
+    kana: 'うち',
+    romaji: 'uchi',
+    spanish: 'casa, hogar',
+    category: 'lugar',
+    notes: 'Se refiere a la casa o domicilio propio.',
+    examples: [
+      { jp: 'うちは 大阪です。', kana: 'うちは おおさかです。', romaji: 'Uchi wa Oosaka desu.', es: 'Mi casa está en Osaka.' }
+    ]
+  },
+  {
+    id: 'l3-uriba',
+    lesson: 3,
+    kanji: '売り場',
+    kana: 'うりば',
+    romaji: 'uriba',
+    spanish: 'sección (en un gran almacén), mostrador de ventas',
+    category: 'lugar',
+    examples: [
+      { jp: 'ワイン売り場は どこですか。', kana: 'ワインうりばは どこですか。', romaji: 'Wain uriba wa doko desu ka.', es: '¿Dónde está la sección de vinos?' }
+    ]
+  },
+  {
+    id: 'l3-chika',
+    lesson: 3,
+    kanji: '地下',
+    kana: 'ちか',
+    romaji: 'chika',
+    spanish: 'sótano, subsuelo',
+    category: 'lugar',
+    examples: [
+      { jp: 'ワイン売り場は 地下1階です。', kana: 'ワインうりばは ちかいっかいです。', romaji: 'Wain uriba wa chika ikkai desu.', es: 'La sección de vinos está en el sótano 1.' }
+    ]
+  },
+  {
+    id: 'l3-kai',
+    lesson: 3,
+    kanji: '〜階',
+    kana: '〜かい（〜がい）',
+    romaji: '~kai (~gai)',
+    spanish: '〜º piso, planta',
+    category: 'lugar',
+    notes: 'Contador de pisos. Nota: 1階 (いっかい), 3階 (さんがい), 6階 (ろっかい), 8階 (はっかい), 10階 (じゅっかい).',
+    examples: [
+      { jp: '食堂は 2階です。', kana: 'しょくどうは にかいです。', romaji: 'Shokudou wa nikai desu.', es: 'El comedor está en el 2º piso.' }
+    ]
+  },
+  {
+    id: 'l3-nangai',
+    lesson: 3,
+    kanji: '何階',
+    kana: 'なんがい',
+    romaji: 'nangai',
+    spanish: '¿qué piso?',
+    category: 'lugar',
+    examples: [
+      { jp: '事務所は 何階ですか。', kana: 'じむしょは なんがいですか。', romaji: 'Jimusho wa nangai desu ka.', es: '¿En qué piso está la oficina?' }
+    ]
+  },
+  {
+    id: 'l3-depaato',
+    lesson: 3,
+    kana: 'デパート',
+    romaji: 'depaato',
+    spanish: 'grandes almacenes, tienda departamental',
+    category: 'lugar',
+    examples: [
+      { jp: 'デパートへ 行きます。', kana: 'デパートへ いきます。', romaji: 'Depaato e ikimasu.', es: 'Voy a los grandes almacenes.' }
+    ]
+  },
+  {
+    id: 'l3-okujou',
+    lesson: 3,
+    kanji: '屋上',
+    kana: 'おくじょう',
+    romaji: 'okujou',
+    spanish: 'azotea, terraza superior',
+    category: 'lugar',
+    examples: [
+      { jp: '屋上は 遊園地です。', kana: 'おくじょうは ゆうえんちです。', romaji: 'Okujou wa yuuenchi desu.', es: 'En la azotea hay un parque de diversiones.' }
+    ]
+  },
+  {
+    id: 'l3-kutsu',
+    lesson: 3,
+    kanji: '靴',
+    kana: 'くつ',
+    romaji: 'kutsu',
+    spanish: 'zapatos, calzado',
+    category: 'objeto',
+    examples: [
+      { jp: 'それは イタリアの 靴です。', kana: 'それは イタリアの くつです。', romaji: 'Sore wa Itaria no kutsu desu.', es: 'Esos son zapatos de Italia.' }
+    ]
+  },
+  {
+    id: 'l3-nekutai',
+    lesson: 3,
+    kana: 'ネクタイ',
+    romaji: 'nekutai',
+    spanish: 'corbata',
+    category: 'objeto',
+    examples: [
+      { jp: 'この ネクタイは いくらですか。', kana: 'この ネクタイは いくらですか。', romaji: 'Kono nekutai wa ikura desu ka.', es: '¿Cuánto cuesta esta corbata?' }
+    ]
+  },
+  {
+    id: 'l3-wain',
+    lesson: 3,
+    kana: 'ワイン',
+    romaji: 'wain',
+    spanish: 'vino',
+    category: 'objeto',
+    examples: [
+      { jp: 'これは 日本の ワインです。', kana: 'これは にほんの ワインです。', romaji: 'Kore wa Nihon no wain desu.', es: 'Este es vino de Japón.' }
+    ]
+  },
+  {
+    id: 'l3-tokei',
+    lesson: 3,
+    kanji: '時計',
+    kana: 'とけい',
+    romaji: 'tokei',
+    spanish: 'reloj',
+    category: 'objeto',
+    examples: [
+      { jp: 'この 時計は 18,600円です。', kana: 'この とけいは いちまんはっせんろっぴゃくえんです。', romaji: 'Kono tokei wa ichiman hassen roppyaku en desu.', es: 'Este reloj cuesta 18.600 yenes.' }
+    ]
+  },
+  {
+    id: 'l3-megane',
+    lesson: 3,
+    kanji: '眼鏡',
+    kana: 'めがね',
+    romaji: 'megane',
+    spanish: 'gafas, lentes',
+    category: 'objeto',
+    examples: [
+      { jp: '眼鏡売り場は 7階です。', kana: 'めがねうりばは ななかいです。', romaji: 'Megane uriba wa nanakai desu.', es: 'La sección de gafas está en el piso 7.' }
+    ]
+  },
+  {
+    id: 'l3-shokuhin',
+    lesson: 3,
+    kanji: '食品',
+    kana: 'しょくひん',
+    romaji: 'shokuhin',
+    spanish: 'alimentos, comestibles',
+    category: 'objeto',
+    examples: [
+      { jp: '食品は 地下1階です。', kana: 'しょくひんは ちかいっかいです。', romaji: 'Shokuhin wa chika ikkai desu.', es: 'Los alimentos están en el sótano 1.' }
+    ]
+  },
+  {
+    id: 'l3-en',
+    lesson: 3,
+    kanji: '〜円',
+    kana: '〜えん',
+    romaji: '~en',
+    spanish: '〜 yen(es)',
+    category: 'numero',
+    notes: 'Unidad monetaria del Japón (¥).',
+    examples: [
+      { jp: 'これは 600円です。', kana: 'これは ろっぴゃくえんです。', romaji: 'Kore wa roppyaku en desu.', es: 'Esto cuesta 600 yenes.' }
+    ]
+  },
+  {
+    id: 'l3-ikura',
+    lesson: 3,
+    kana: 'いくら',
+    romaji: 'ikura',
+    spanish: 'cuánto (término limitado a cantidad de dinero)',
+    category: 'numero',
+    notes: 'Interrogativo para indagar el precio de un bien o servicio.',
+    examples: [
+      { jp: 'これは いくらですか。……2,500円です。', kana: 'これは いくらですか。……にせんごひゃくえんです。', romaji: 'Kore wa ikura desu ka. ... Nisen gohyaku en desu.', es: '¿Cuánto cuesta esto? ... Cuesta 2.500 yenes.' }
+    ]
+  },
+  {
+    id: 'l3-hyaku',
+    lesson: 3,
+    kanji: '百',
+    kana: 'ひゃく',
+    romaji: 'hyaku',
+    spanish: 'cien (100)',
+    category: 'numero',
+    notes: 'Variaciones fonéticas: 300 (さんびゃく), 600 (ろっぴゃく), 800 (はっぴゃく).'
+  },
+  {
+    id: 'l3-sen',
+    lesson: 3,
+    kanji: '千',
+    kana: 'せん',
+    romaji: 'sen',
+    spanish: 'mil (1.000)',
+    category: 'numero',
+    notes: 'Variaciones fonéticas: 3.000 (さんぜん), 8.000 (はっせん).'
+  },
+  {
+    id: 'l3-man',
+    lesson: 3,
+    kanji: '万',
+    kana: 'まん',
+    romaji: 'man',
+    spanish: 'diez mil (10.000)',
+    category: 'numero',
+    notes: 'Unidad decimal fundamental en japonés: 10.000 = 一万 (いちまん).'
+  },
+  {
+    id: 'l3-sumimasen',
+    lesson: 3,
+    kana: 'すみません',
+    romaji: 'sumimasen',
+    spanish: 'Disculpe / Por favor / Con permiso',
+    category: 'expresion',
+    notes: 'Fórmula para llamar la atención de dependientes o disculparse educadamente.',
+    examples: [
+      { jp: 'すみません。トイレは どこですか。', kana: 'すみません。トイレは どこですか。', romaji: 'Sumimasen. Toire wa doko desu ka.', es: 'Disculpe, ¿dónde está el baño?' }
+    ]
+  },
+  {
+    id: 'l3-doumo',
+    lesson: 3,
+    kana: 'どうも',
+    romaji: 'doumo',
+    spanish: 'Gracias (breve)',
+    category: 'expresion',
+    notes: 'Forma abreviada de cortesía común en intercambios cotidianos.',
+    examples: [
+      { jp: 'あそこです。……どうも。', kana: 'あそこです。……どうも。', romaji: 'Asoko desu. ... Doumo.', es: 'Está allí. ... Gracias.' }
+    ]
+  },
+  {
+    id: 'l3-irasshaimase',
+    lesson: 3,
+    kana: 'いらっしゃいませ',
+    romaji: 'irasshaimase',
+    spanish: 'Buenos días / Bienvenido (expresión con que se recibe a clientes)',
+    category: 'expresion',
+    notes: 'Saludo ceremonial e imprescindible con el que todo comercio recibe al cliente a su llegada.'
+  },
+  {
+    id: 'l3-misetekudasai',
+    lesson: 3,
+    kanji: '［〜を］見せて ください',
+    kana: '［〜を］みせて ください',
+    romaji: '[~o] misete kudasai',
+    spanish: 'Por favor, puede mostrarme/enseñarme [〜]',
+    category: 'expresion',
+    examples: [
+      { jp: 'その ワインを 見せて ください。', kana: 'その ワインを みせて ください。', romaji: 'Sono wain o misete kudasai.', es: 'Por favor, muéstreme ese vino.' }
+    ]
+  },
+  {
+    id: 'l3-ja',
+    lesson: 3,
+    kana: 'じゃ',
+    romaji: 'ja',
+    spanish: 'bueno, entonces',
+    category: 'expresion',
+    notes: 'Conector de toma de decisión ante lo conversado.',
+    examples: [
+      { jp: 'じゃ、これを ください。', kana: 'じゃ、これを ください。', romaji: 'Ja, kore o kudasai.', es: 'Bueno, entonces deme este, por favor.' }
+    ]
+  },
+  {
+    id: 'l3-kudasai',
+    lesson: 3,
+    kana: '［〜を］ください',
+    romaji: '[~o] kudasai',
+    spanish: 'Déme [〜], por favor',
+    category: 'expresion',
+    notes: 'Fórmula estándar para pedir la compra de un producto.',
+    examples: [
+      { jp: 'これを ください。', kana: 'これを ください。', romaji: 'Kore o kudasai.', es: 'Deme este, por favor.' }
+    ]
+  },
+  {
+    id: 'l3-itaria',
+    lesson: 3,
+    kana: 'イタリア',
+    romaji: 'Itaria',
+    spanish: 'Italia',
+    category: 'pais'
+  },
+  {
+    id: 'l3-suisu',
+    lesson: 3,
+    kana: 'スイス',
+    romaji: 'Suisu',
+    spanish: 'Suiza',
+    category: 'pais'
+  },
+  {
+    id: 'l3-furansu',
+    lesson: 3,
+    kana: 'フランス',
+    romaji: 'Furansu',
+    spanish: 'Francia',
+    category: 'pais'
+  },
+  {
+    id: 'l3-jakaruta',
+    lesson: 3,
+    kana: 'ジャカルタ',
+    romaji: 'Jakaruta',
+    spanish: 'Yakarta (capital de Indonesia)',
+    category: 'pais'
+  },
+  {
+    id: 'l3-bankoku',
+    lesson: 3,
+    kana: 'バンコク',
+    romaji: 'Bankoku',
+    spanish: 'Bangkok (capital de Tailandia)',
+    category: 'pais'
+  },
+  {
+    id: 'l3-berurin',
+    lesson: 3,
+    kana: 'ベルリン',
+    romaji: 'Berurin',
+    spanish: 'Berlín (capital de Alemania)',
+    category: 'pais'
+  },
+  {
+    id: 'l3-shin-osaka',
+    lesson: 3,
+    kanji: '新大阪',
+    kana: 'しんおおさか',
+    romaji: 'Shin-Oosaka',
+    spanish: 'Shin-Osaka (nombre de estación de tren de Shinkansen en Osaka)',
+    category: 'lugar'
   }
+
 ];
 
 export const GRAMMAR_DATA: GrammarPoint[] = [
@@ -832,7 +1460,192 @@ export const GRAMMAR_DATA: GrammarPoint[] = [
         es: '¿Este paraguas es suyo? ... No, es distinto. Es del Sr. Schmidt. ... Ah, ya veo.'
       }
     ]
+  },
+  // LECCIÓN 3
+  {
+    id: 'g3-koko-soko-asoko',
+    lesson: 3,
+    pattern: 'ここ / そこ / あそこ / どこ',
+    title: '1. Adverbios demostrativos de Lugar (Sistema Ko-So-A-Do espacial)',
+    explanation: 'Los adverbios ここ, そこ, あそこ indican lugares:\n• ここ: Se refiere al lugar donde está el hablante.\n• そこ: Se refiere al lugar donde está el oyente.\n• あそこ: Se refiere a un lugar distante tanto del hablante como del oyente.\n• どこ: Pronombre interrogativo que significa "¿dónde?".\n\n[Nota territorial]: Cuando el hablante considera que el oyente se encuentra dentro de su mismo territorio o habitación, el lugar donde ambos están se indica con ここ. En este caso, そこ designa un punto un poco distante de ambos, y あそこ un lugar todavía más alejado.',
+    keyRule: 'Indican ubicación física espacial: ここ (aquí), そこ (ahí), あそこ (allí / allá), どこ (dónde).',
+    examples: [
+      {
+        jp: 'ここは 食堂です。',
+        kana: 'ここは しょくどうです。',
+        romaji: 'Koko wa shokudou desu.',
+        es: 'Aquí es el comedor.',
+        breakdown: 'ここ (aquí) + は (tema) + 食堂 (comedor) + です (es)'
+      },
+      {
+        jp: 'お手洗いは あそこです。',
+        kana: 'おてあらいは あそこです。',
+        romaji: 'Otearai wa asoko desu.',
+        es: 'El servicio está allí.',
+        breakdown: 'お手洗い (baño) + は + あそこ (allí) + です (está)'
+      },
+      {
+        jp: 'トイレは どこですか。……あそこです。',
+        kana: 'トイレは どこですか。……あそこです。',
+        romaji: 'Toire wa doko desu ka. ... Asoko desu.',
+        es: '¿Dónde está el baño? ... Está allí.',
+        breakdown: 'どこですか (¿dónde está?)'
+      }
+    ],
+    tips: [
+      'Al igual que これ・それ・あれ, siguen la pauta Ko (cerca de mí), So (cerca de ti), A (lejos de ambos), Do (pregunta).'
+    ]
+  },
+  {
+    id: 'g3-kochira-sochira-achira',
+    lesson: 3,
+    pattern: 'こちら / そちら / あちら / どちら',
+    title: '2. Demostrativos de Dirección y Cortesía',
+    explanation: 'こちら, そちら, あちら son adverbios que se refieren primordialmente a direcciones ("por aquí", "por ahí", "por allí"). No obstante, en la vida diaria y en los comercios se emplean habitualmente para indicar lugares con un nivel de respeto y cortesía notablemente superior a ここ, そこ, あそこ.\n\nどちら es el interrogativo correspondiente: se usa para preguntar "¿por cuál dirección?" o cortésmente "¿dónde?".',
+    keyRule: 'Forma cortés y refinada: こちら (por aquí), そちら (por ahí), あちら (por allí), どちら (¿por dónde? / ¿dónde?).',
+    examples: [
+      {
+        jp: 'エレベーターは どちらですか。……あちらです。',
+        kana: 'エレベーターは どちらですか。……あちらです。',
+        romaji: 'Erebeetaa wa dochira desu ka. ... Achira desu.',
+        es: '¿Dónde / Por dónde está el ascensor? ... Está por allí.',
+        breakdown: 'どちら (forma cortés de どこ) + あちら (forma cortés de あそこ)'
+      },
+      {
+        jp: '事務所は どちらですか。……あちらです。',
+        kana: 'じむしょは どちらですか。……あちらです。',
+        romaji: 'Jimusho wa dochira desu ka. ... Achira desu.',
+        es: '¿Por dónde queda la oficina? ... Está por allá.'
+      }
+    ],
+    tips: [
+      'En tiendas, hoteles y empresas japonesas, el personal siempre usará こちら/そちら/あちら/どちら para atender al público.'
+    ]
+  },
+  {
+    id: 'g3-wa-lugar-desu',
+    lesson: 3,
+    pattern: 'S は [Lugar / Piso] です',
+    title: '3. Localización de Objetos, Personas e Instalaciones',
+    explanation: 'Esta frase modelo sirve para indicar con precisión el lugar o piso donde se encuentran objetos, lugares, secciones o personas:\n[Sustantivo] は [Lugar o Piso] です。\n\nCuando el lugar es una planta o piso, se acompaña del contador 〜階 (かい / がい): 1階 (いっかい), 2階 (にかい), 3階 (さんがい), 地下1階 (ちかいっかい).',
+    keyRule: 'Estructura: [Sujeto/Instalación] は [Ubicación / Piso] です。',
+    examples: [
+      {
+        jp: '電話は 2階です。',
+        kana: 'でんわは にかいです。',
+        romaji: 'Denwa wa nikai desu.',
+        es: 'El teléfono está en el piso 2.',
+        breakdown: '電話 (teléfono) + は + 2階 (segundo piso) + です'
+      },
+      {
+        jp: '山田さんは 事務所です。',
+        kana: 'やまださんは じむしょです。',
+        romaji: 'Yamada-san wa jimusho desu.',
+        es: 'El Sr. Yamada está en la oficina.',
+        breakdown: 'Indica la ubicación actual de una persona.'
+      },
+      {
+        jp: 'ワイン売り場は 地下1階です。',
+        kana: 'ワインうりばは ちかいっかいです。',
+        romaji: 'Wain uriba wa chika ikkai desu.',
+        es: 'La sección de vinos está en el primer piso del subsuelo.'
+      }
+    ]
+  },
+  {
+    id: 'g3-doko-dochira-org',
+    lesson: 3,
+    pattern: '学校 / 会社 は どこ / どちら ですか',
+    title: '4. Preguntar por Entidades, Empresas o Países con どこ o どちら',
+    explanation: 'Al preguntar por el nombre del país, compañía, escuela u organización a la que pertenece una persona, en japonés se emplean どこ o どちら en vez de なん (qué).\n\nどちら es una variante mucho más cortés que どこ. Si alguien te pregunta 会社は どちらですか, no te está pidiendo la dirección física de la calle, sino el nombre de la empresa donde trabajas.',
+    keyRule: 'Preguntar por país, empresa o escuela requiere どこ o どちら (nunca なん).',
+    examples: [
+      {
+        jp: '学校は どこですか。',
+        kana: 'がっこうは どこですか。',
+        romaji: 'Gakkou wa doko desu ka.',
+        es: '¿Cuál es el nombre de tu escuela / universidad?'
+      },
+      {
+        jp: '会社は どちらですか。……パワー電気です。',
+        kana: 'かいしゃは どちらですか。……パワーでんきです。',
+        romaji: 'Kaisha wa dochira desu ka. ... Pawaa Denki desu.',
+        es: '¿En qué empresa trabaja Ud.? ... En Power Electric.'
+      },
+      {
+        jp: '［お］国は どちらですか。……アメリカです。',
+        kana: '［お］くには どちらですか。……アメリカです。',
+        romaji: '[O]kuni wa dochira desu ka. ... Amerika desu.',
+        es: '¿De qué país es Ud.? ... De Estados Unidos.'
+      }
+    ],
+    tips: [
+      'Recuerda: "¿Cuál es tu empresa?" = 会社は どこ/どちら ですか (literal: "¿Dónde es tu empresa?").'
+    ]
+  },
+  {
+    id: 'g3-no-origin-maker',
+    lesson: 3,
+    pattern: 'S1 の S2 (País de procedencia o Empresa fabricante)',
+    title: '5. Partícula の: Origen geográfico o Fabricante del producto',
+    explanation: 'Cuando S1 representa el nombre de un país y S2 un producto, [S1 の S2] indica el lugar o país donde se fabricó S2 (ej. 日本のワイン = vino producido en Japón).\n\nCuando S1 representa el nombre de una empresa y S2 el producto, [S1 の S2] significa que S2 está fabricado por esa empresa (ej. パワー電気のコンピューター = computadora de Power Electric).\n\nEn ambos casos la pregunta interrogativa se formula con: これは どこの [Producto] ですか。',
+    keyRule: 'どこの [Producto] ですか → [País o Marca] の [Producto] です。',
+    examples: [
+      {
+        jp: 'これは どこの コンピューターですか。……日本の コンピューターです。',
+        kana: 'これは どこの コンピューターですか。……にほんの コンピューターです。',
+        romaji: 'Kore wa doko no konpyuutaa desu ka. ... Nihon no konpyuutaa desu.',
+        es: '¿De dónde es esta computadora? ... Es una computadora japonesa / hecha en Japón.',
+        breakdown: 'どこの (de qué país/fabricante) + コンピューター (computadora)'
+      },
+      {
+        jp: 'それは どこの 靴ですか。……イタリアの 靴です。',
+        kana: 'それは どこの くつですか。……イタリアの くつです。',
+        romaji: 'Sore wa doko no kutsu desu ka. ... Itaria no kutsu desu.',
+        es: '¿De dónde son esos zapatos? ... Son zapatos de Italia.'
+      }
+    ]
+  },
+  {
+    id: 'g3-o-kuni',
+    lesson: 3,
+    pattern: 'Prefijo honorífico de cortesía お〜 (［お］国)',
+    title: '6. El Prefijo de Respeto [お] ante pertenencias del interlocutor',
+    explanation: 'El prefijo お se agrega a una palabra que se refiere al oyente o a una tercera persona a fin de expresar el respeto y consideración del hablante hacia él.\n\nEjemplo: 国 (país) se transforma en お国 (su respetable país) al preguntar por el origen del interlocutor. Jamás se debe usar お delante de las propias cosas o del propio país.',
+    keyRule: 'お + Palabra = Demuestra deferencia hacia el oyente (ej. お国, お手洗い, お土産, お名前).',
+    examples: [
+      {
+        jp: 'お国は どちらですか。',
+        kana: 'おくには どちらですか。',
+        romaji: 'Okuni wa dochira desu ka.',
+        es: '¿De qué país es usted? / ¿Cuál es su país natal?',
+        breakdown: 'お国 (su país) + は + どちら (dónde con cortesía) + ですか'
+      }
+    ]
+  },
+  {
+    id: 'g3-ikura-en',
+    lesson: 3,
+    pattern: 'いくらですか / 〜円です',
+    title: '7. Preguntar y Expresar Precios en Yenes (円)',
+    explanation: 'いくら es el término interrogativo específico para preguntar por el precio de una mercancía ("¿cuánto cuesta?").\n\nLas respuestas usan la cifra monetaria seguida de la unidad 円 (えん):\n• 100円: ひゃくえん\n• 1.000円: せんえん\n• 10.000円: いちまんえん\n• 18.600円: いちまんはっせんろっぴゃくえん',
+    keyRule: 'Pregunta: [Objeto] は いくらですか。 Respuesta: [Precio] 円です。',
+    examples: [
+      {
+        jp: 'この 時計は いくらですか。……18,600円です。',
+        kana: 'この とけいは いくらですか。……いちまんはっせんろっぴゃくえんです。',
+        romaji: 'Kono tokei wa ikura desu ka. ... Ichiman hassen roppyaku en desu.',
+        es: '¿Cuánto cuesta este reloj? ... Cuesta 18.600 yenes.'
+      },
+      {
+        jp: 'これは いくらですか。……2,500円です。',
+        kana: 'これは いくらですか。……にせんごひゃくえんです。',
+        romaji: 'Kore wa ikura desu ka. ... Nisen gohyaku en desu.',
+        es: '¿Cuánto es esto? ... Son 2.500 yenes.'
+      }
+    ]
   }
+
 ];
 
 export const SENTENCE_BUILDER_DATA: SentenceBuilderExercise[] = [
@@ -957,7 +1770,109 @@ export const SENTENCE_BUILDER_DATA: SentenceBuilderExercise[] = [
     tokens: ['違います', 'いいえ、'],
     correctOrder: ['いいえ、', '違います'],
     explanation: 'Respuesta idiomática estándar para negar una suposición sobre un objeto o situación.'
+  },
+  // LECCIÓN 3
+  {
+    id: 'sb-13',
+    lesson: 3,
+    promptEs: 'Aquí es el comedor.',
+    targetJp: 'ここは 食堂です。',
+    targetKana: 'ここ は しょくどう です',
+    tokens: ['食堂です', 'ここは'],
+    correctOrder: ['ここは', '食堂です'],
+    explanation: 'ここ (aquí) actúa como sujeto/tema con は, seguido del lugar (食堂です).'
+  },
+  {
+    id: 'sb-14',
+    lesson: 3,
+    promptEs: 'El ascensor está allí.',
+    targetJp: 'エレベーターは あそこです。',
+    targetKana: 'エレベーター は あそこ です',
+    tokens: ['あそこです', 'エレベーターは'],
+    correctOrder: ['エレベーターは', 'あそこです'],
+    explanation: 'El sujeto es el ascensor (エレベーターは) y el predicado es su ubicación lejana (あそこです).'
+  },
+  {
+    id: 'sb-15',
+    lesson: 3,
+    promptEs: '¿Dónde está el servicio / baño?',
+    targetJp: 'お手洗いは どこですか。',
+    targetKana: 'おてあらい は どこ です か',
+    tokens: ['どこですか', 'お手洗いは'],
+    correctOrder: ['お手洗いは', 'どこですか'],
+    explanation: 'お手洗いは + interrogativo de lugar どこ + ですか.'
+  },
+  {
+    id: 'sb-16',
+    lesson: 3,
+    promptEs: 'El teléfono está en el segundo piso.',
+    targetJp: '電話は 2階です。',
+    targetKana: 'でんわ は にかい です',
+    tokens: ['2階です', '電話は'],
+    correctOrder: ['電話は', '2階です'],
+    explanation: '2階 (にかい) indica el piso donde se localiza el objeto.'
+  },
+  {
+    id: 'sb-17',
+    lesson: 3,
+    promptEs: 'El Sr. Yamada está en la sala de reuniones.',
+    targetJp: '山田さんは 会議室です。',
+    targetKana: 'やまださん は かいぎしつ です',
+    tokens: ['会議室です', '山田さんは'],
+    correctOrder: ['山田さんは', '会議室です'],
+    explanation: 'Indica la ubicación de una persona sin necesidad de verbo adicional: [Persona] は [Lugar] です.'
+  },
+  {
+    id: 'sb-18',
+    lesson: 3,
+    promptEs: '¿Por dónde queda la oficina? (forma cortés)',
+    targetJp: '事務所は どちらですか。',
+    targetKana: 'じむしょ は どちら です か',
+    tokens: ['どちらですか', '事務所は'],
+    correctOrder: ['事務所は', 'どちらですか'],
+    explanation: 'どちら es la forma cortés y de dirección equivalente a どこ.'
+  },
+  {
+    id: 'sb-19',
+    lesson: 3,
+    promptEs: '¿De qué país es usted? (con cortesía)',
+    targetJp: 'お国は どちらですか。',
+    targetKana: 'おくに は どちら です か',
+    tokens: ['どちらですか', 'お国は'],
+    correctOrder: ['お国は', 'どちらですか'],
+    explanation: 'お国は + どちらですか es la fórmula refinada y estándar para preguntar la patria o nacionalidad.'
+  },
+  {
+    id: 'sb-20',
+    lesson: 3,
+    promptEs: 'Esta es una computadora de Japón / japonesa.',
+    targetJp: 'これは 日本の コンピューターです。',
+    targetKana: 'これ は にほん の コンピューター です',
+    tokens: ['コンピューターです', 'これは', '日本の'],
+    correctOrder: ['これは', '日本の', 'コンピューターです'],
+    explanation: '日本の indica el país de origen/fabricación del producto tecnológico.'
+  },
+  {
+    id: 'sb-21',
+    lesson: 3,
+    promptEs: '¿Cuánto cuesta este reloj?',
+    targetJp: 'この 時計は いくらですか。',
+    targetKana: 'この とけい は いくら です か',
+    tokens: ['いくらですか', 'この', '時計は'],
+    correctOrder: ['この', '時計は', 'いくらですか'],
+    explanation: 'この reloj (時計は) + interrogativo de precio (いくらですか).'
+  },
+  {
+    id: 'sb-22',
+    lesson: 3,
+    promptEs: 'Entonces, deme este, por favor.',
+    targetJp: 'じゃ、これを ください。',
+    targetKana: 'じゃ 、 これ を ください',
+    tokens: ['これを', 'ください', 'じゃ、'],
+    correctOrder: ['じゃ、', 'これを', 'ください'],
+    explanation: 'Fórmula de compra en tiendas: じゃ (entonces) + これを (este) + ください (déme por favor).'
   }
+
 ];
 
 export const PARTICLE_EXERCISES: ParticleExercise[] = [
@@ -1040,7 +1955,78 @@ export const PARTICLE_EXERCISES: ParticleExercise[] = [
     correctParticle: 'も',
     options: ['も', 'は', 'の', 'か'],
     explanation: 'Se usa も para agregar otro elemento a la misma categoría (también).'
+  },
+  {
+    id: 'p-9',
+    lesson: 3,
+    sentencePre: 'ここ',
+    sentencePost: '食堂です。',
+    translation: 'Aquí es el comedor.',
+    correctParticle: 'は',
+    options: ['は', 'の', 'も', 'で'],
+    explanation: 'は marca el tema del enunciado ("En cuanto a este lugar / aquí, es el comedor").'
+  },
+  {
+    id: 'p-10',
+    lesson: 3,
+    sentencePre: 'エレベーター',
+    sentencePost: 'あそこです。',
+    translation: 'El ascensor está allí.',
+    correctParticle: 'は',
+    options: ['は', 'が', 'の', 'に'],
+    explanation: 'は indica el sujeto o elemento del que se señala su ubicación.'
+  },
+  {
+    id: 'p-11',
+    lesson: 3,
+    sentencePre: 'これは どこ',
+    sentencePost: 'ワインですか。',
+    translation: '¿De dónde es este vino?',
+    correctParticle: 'の',
+    options: ['の', 'は', 'も', 'と'],
+    explanation: 'どこの conecta con vino para preguntar por su lugar o país de elaboración.'
+  },
+  {
+    id: 'p-12',
+    lesson: 3,
+    sentencePre: 'イタリア',
+    sentencePost: '靴です。',
+    translation: 'Son zapatos de Italia.',
+    correctParticle: 'の',
+    options: ['の', 'は', 'で', 'に'],
+    explanation: 'イタリアの靴 expresa el país de origen o fabricación con la partícula の.'
+  },
+  {
+    id: 'p-13',
+    lesson: 3,
+    sentencePre: 'この時計は いくらです',
+    sentencePost: '。',
+    translation: '¿Cuánto cuesta este reloj?',
+    correctParticle: 'か',
+    options: ['か', 'ね', 'よ', 'の'],
+    explanation: 'か convierte la afirmación en una oración interrogativa al final de la frase.'
+  },
+  {
+    id: 'p-14',
+    lesson: 3,
+    sentencePre: 'その ワイン',
+    sentencePost: '見せて ください。',
+    translation: 'Por favor, muéstreme ese vino.',
+    correctParticle: 'を',
+    options: ['を', 'は', 'の', 'に'],
+    explanation: 'を marca el objeto directo sobre el cual recae la acción de mostrar (見せてください).'
+  },
+  {
+    id: 'p-15',
+    lesson: 3,
+    sentencePre: 'これ',
+    sentencePost: 'ください。',
+    translation: 'Déme este, por favor.',
+    correctParticle: 'を',
+    options: ['を', 'は', 'が', 'で'],
+    explanation: 'を señala el objeto que se solicita comprar o recibir (これを ください).'
   }
+
 ];
 
 export const DEMONSTRATIVE_SCENARIOS: DemonstrativeScenario[] = [
@@ -1133,7 +2119,83 @@ export const DEMONSTRATIVE_SCENARIOS: DemonstrativeScenario[] = [
     correctAnswer: 'あの',
     options: ['この', 'その', 'あの'],
     explanation: 'Va seguido de sustantivo (人 o 方) y está a distancia de ambos, por lo que corresponde あの.'
+  },
+  {
+    id: 'dem-7',
+    lesson: 3,
+    speakerLabel: 'Hablante (Tú)',
+    listenerLabel: 'Compañero (Junto a ti)',
+    objectName: '食堂 (Comedor)',
+    objectKana: 'しょくどう',
+    objectSpanish: 'Comedor',
+    distance: 'near_speaker',
+    mode: 'place',
+    contextDescription: 'Estás entrando al comedor con tu compañero e indicas el recinto en el que ambos acaban de ingresar: "_____ es el comedor."',
+    correctAnswer: 'ここ',
+    options: ['ここ', 'そこ', 'あそこ'],
+    explanation: 'ここ se refiere al lugar donde se encuentra el propio hablante o al territorio compartido de ambos.'
+  },
+  {
+    id: 'dem-8',
+    lesson: 3,
+    speakerLabel: 'Hablante (Tú)',
+    listenerLabel: 'Recepcionista (Mostrador)',
+    objectName: '受付 (Recepción)',
+    objectKana: 'うけつけ',
+    objectSpanish: 'Recepción',
+    distance: 'near_listener',
+    mode: 'place',
+    contextDescription: 'Te aproximas al mostrador donde atiende el recepcionista y le consultas si ese sitio es la recepción: "¿_____ es la recepción?"',
+    correctAnswer: 'そこ',
+    options: ['ここ', 'そこ', 'あそこ'],
+    explanation: 'そこ se refiere al lugar donde está situado el oyente.'
+  },
+  {
+    id: 'dem-9',
+    lesson: 3,
+    speakerLabel: 'Hablante (Tú)',
+    listenerLabel: 'Visitante',
+    objectName: 'お手洗い (Baño)',
+    objectKana: 'おてあらい',
+    objectSpanish: 'Baño / Servicio',
+    distance: 'far_both',
+    mode: 'place',
+    contextDescription: 'Un visitante te pide indicaciones para ir al baño. Señalas con la mano al final del corredor, lejos de los dos: "El servicio está _____."',
+    correctAnswer: 'あそこ',
+    options: ['ここ', 'そこ', 'あそこ'],
+    explanation: 'あそこ se refiere a un punto o lugar distante tanto del hablante como del oyente.'
+  },
+  {
+    id: 'dem-10',
+    lesson: 3,
+    speakerLabel: 'Dependiente (Tienda)',
+    listenerLabel: 'Cliente',
+    objectName: 'エレベーター (Ascensor)',
+    objectKana: 'エレベーター',
+    objectSpanish: 'Ascensor',
+    distance: 'far_both',
+    mode: 'direction',
+    contextDescription: 'El dependiente guía educadamente al cliente indicándole la dirección lejana donde se encuentran los elevadores: "El ascensor está _____."',
+    correctAnswer: 'あちら',
+    options: ['こちら', 'そちら', 'あちら'],
+    explanation: 'あちら es la forma cortés de あそこ y expresa la dirección hacia donde queda el ascensor.'
+  },
+  {
+    id: 'dem-11',
+    lesson: 3,
+    speakerLabel: 'Entrevistador',
+    listenerLabel: 'Postulante',
+    objectName: '［お］国 (País)',
+    objectKana: 'くに',
+    objectSpanish: 'País de origen',
+    distance: 'near_listener',
+    mode: 'direction',
+    contextDescription: 'En una conversación formal de negocios, te consultan de qué país provienes con máxima cortesía: "［お］国は _____ですか。"',
+    correctAnswer: 'どちら',
+    options: ['どこ', 'どちら', 'なん'],
+    explanation: 'どちら es la variante refinada y cortés de どこ para indagar el país, compañía o procedencia de una persona.'
   }
+
 ];
 
 export const DIALOGUE_SCENARIOS: DialogueScenario[] = [
@@ -1293,7 +2355,207 @@ export const DIALOGUE_SCENARIOS: DialogueScenario[] = [
         es: 'Ah, ya veo. Muchas gracias.'
       }
     ]
+  },
+  {
+    id: 'dia-4',
+    lesson: 3,
+    title: 'Deme este, por favor (これを ください)',
+    description: 'María visita unos grandes almacenes (デパート) para comprar vino. Localiza la sección en el subsuelo, pide ver una botella, averigua procedencia y precio, y formaliza la compra.',
+    lines: [
+      {
+        id: 'dia-4-1',
+        speaker: 'Vendedor A',
+        speakerRole: 'Recepción del almacén',
+        jp: 'いらっしゃいませ。',
+        kana: 'いらっしゃいませ。',
+        romaji: 'Irasshaimase.',
+        es: '¡Bienvenida!'
+      },
+      {
+        id: 'dia-4-2',
+        speaker: 'María',
+        speakerRole: 'Cliente',
+        jp: 'すみません。ワイン売り場は どこですか。',
+        kana: 'すみません。ワインうりばは どこですか。',
+        romaji: 'Sumimasen. Wain uriba wa doko desu ka.',
+        es: 'Por favor, ¿dónde está la sección de vinos?'
+      },
+      {
+        id: 'dia-4-3',
+        speaker: 'Vendedor A',
+        speakerRole: 'Dependiente',
+        jp: '地下1階で ございます。',
+        kana: 'ちかいっかいで ございます。',
+        romaji: 'Chika ikkai de gozaimasu.',
+        es: 'Está en el primer piso del subsuelo, señora.'
+      },
+      {
+        id: 'dia-4-4',
+        speaker: 'María',
+        speakerRole: 'Cliente',
+        jp: 'どうも。',
+        kana: 'どうも。',
+        romaji: 'Doumo.',
+        es: 'Muchas gracias.'
+      },
+      {
+        id: 'dia-4-5',
+        speaker: 'María',
+        speakerRole: 'En la sección de vinos',
+        jp: 'すみません。その ワインを 見せて ください。',
+        kana: 'すみません。その ワインを みせて ください。',
+        romaji: 'Sumimasen. Sono wain o misete kudasai.',
+        es: 'Por favor, ¿puede mostrarme ese vino?'
+      },
+      {
+        id: 'dia-4-6',
+        speaker: 'Vendedor B',
+        speakerRole: 'Sommelier',
+        jp: 'はい、どうぞ。',
+        kana: 'はい、どうぞ。',
+        romaji: 'Hai, douzo.',
+        es: 'Sí, aquí tiene.'
+      },
+      {
+        id: 'dia-4-7',
+        speaker: 'María',
+        speakerRole: 'Preguntando origen',
+        jp: 'これは どこの ワインですか。',
+        kana: 'これは どこの ワインですか。',
+        romaji: 'Kore wa doko no wain desu ka.',
+        es: '¿De dónde es este vino?'
+      },
+      {
+        id: 'dia-4-8',
+        speaker: 'Vendedor B',
+        speakerRole: 'Sommelier',
+        jp: '日本の ワインです。',
+        kana: 'にほんの ワインです。',
+        romaji: 'Nihon no wain desu.',
+        es: 'Es vino japonés.'
+      },
+      {
+        id: 'dia-4-9',
+        speaker: 'María',
+        speakerRole: 'Tu turno: Preguntar el precio',
+        jp: 'いくらですか。',
+        kana: 'いくらですか。',
+        romaji: 'Ikura desu ka.',
+        es: '¿Cuánto cuesta?',
+        options: [
+          {
+            textJp: 'いくらですか。',
+            textKana: 'いくらですか。',
+            textEs: '¿Cuánto cuesta?',
+            isCorrect: true,
+            feedback: '¡Exacto! いくら es la palabra precisa para preguntar por el precio de una mercancía.'
+          },
+          {
+            textJp: 'どちらですか。',
+            textKana: 'どちらですか。',
+            textEs: '¿Por dónde queda? / ¿Dónde está?',
+            isCorrect: false,
+            feedback: 'どちら pregunta por dirección o ubicación cortés, no por el precio en dinero.'
+          },
+          {
+            textJp: '何ですか。',
+            textKana: 'なんですか。',
+            textEs: '¿Qué es?',
+            isCorrect: false,
+            feedback: '何ですか pregunta por la naturaleza del objeto, no por cuánto vale.'
+          }
+        ]
+      },
+      {
+        id: 'dia-4-10',
+        speaker: 'Vendedor B',
+        speakerRole: 'Sommelier',
+        jp: '2,500円です。',
+        kana: 'にせんごひゃくえんです。',
+        romaji: 'Nisen gohyaku en desu.',
+        es: '2.500 yenes, señora.'
+      },
+      {
+        id: 'dia-4-11',
+        speaker: 'María',
+        speakerRole: 'Cerrando la compra',
+        jp: 'じゃ、これを ください。',
+        kana: 'じゃ、これを ください。',
+        romaji: 'Ja, kore o kudasai.',
+        es: 'Entonces, deme este, por favor.'
+      }
+    ]
+  },
+  {
+    id: 'dia-5',
+    lesson: 3,
+    title: 'Consultando ubicaciones en una empresa',
+    description: 'Un cliente llega a las oficinas de 3A Corporation y pregunta cortésmente por la sala de conferencias y por el Sr. Yamada.',
+    lines: [
+      {
+        id: 'dia-5-1',
+        speaker: 'Visitante',
+        speakerRole: 'Cliente',
+        jp: 'すみません。山田さんは どこですか。',
+        kana: 'すみません。やまださんは どこですか。',
+        romaji: 'Sumimasen. Yamada-san wa doko desu ka.',
+        es: 'Disculpe, ¿dónde está el Sr. Yamada?'
+      },
+      {
+        id: 'dia-5-2',
+        speaker: 'Recepcionista',
+        speakerRole: 'Recepción',
+        jp: '山田さんは 会議室です。',
+        kana: 'やまださんは かいぎしつです。',
+        romaji: 'Yamada-san wa kaigishitsu desu.',
+        es: 'El Sr. Yamada está en la sala de reuniones.'
+      },
+      {
+        id: 'dia-5-3',
+        speaker: 'Visitante',
+        speakerRole: 'Tu turno: Preguntar por la sala con cortesía',
+        jp: '会議室は どちらですか。',
+        kana: 'かいぎしつは どちらですか。',
+        romaji: 'Kaigishitsu wa dochira desu ka.',
+        es: '¿Por dónde queda la sala de reuniones?',
+        options: [
+          {
+            textJp: '会議室は どちらですか。',
+            textKana: 'かいぎしつは どちらですか。',
+            textEs: '¿Por dónde queda la sala de reuniones?',
+            isCorrect: true,
+            feedback: '¡Excelente! どちら es la forma cortés ideal para un entorno profesional.'
+          },
+          {
+            textJp: '会議室は だれですか。',
+            textKana: 'かいぎしつは だれですか。',
+            textEs: '¿Quién es la sala de reuniones?',
+            isCorrect: false,
+            feedback: 'だれ pregunta por personas, no por ubicaciones.'
+          }
+        ]
+      },
+      {
+        id: 'dia-5-4',
+        speaker: 'Recepcionista',
+        speakerRole: 'Indicando el camino',
+        jp: 'あちらで ございます。エレベーターの 隣です。',
+        kana: 'あちらで ございます。エレベーターの となりです。',
+        romaji: 'Achira de gozaimasu. Erebeetaa no tonari desu.',
+        es: 'Está por allí, junto al ascensor.'
+      },
+      {
+        id: 'dia-5-5',
+        speaker: 'Visitante',
+        speakerRole: 'Agradeciendo',
+        jp: 'どうも ありがとうございます。',
+        kana: 'どうも ありがとう ございます。',
+        romaji: 'Doumo arigatou gozaimasu.',
+        es: 'Muchísimas gracias.'
+      }
+    ]
   }
+
 ];
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
@@ -1421,6 +2683,105 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
     correctIndex: 1,
     explanation: '本 (ほん) = libro, 辞書 (じしょ) = diccionario.'
+  },
+  {
+    id: 'q-11',
+    lesson: 3,
+    type: 'meaning',
+    prompt: '¿Qué significa la palabra 「じどうはんばいき (自動販売機)」?',
+    options: ['Escalera mecánica', 'Máquina de venta automática / expendedora', 'Ascensor o elevador', 'Cajero automático bancario'],
+    correctIndex: 1,
+    explanation: '自動販売機 (jidouhanbaiki) es la máquina expendedora, omnipresente en todo Japón.'
+  },
+  {
+    id: 'q-12',
+    lesson: 3,
+    type: 'grammar',
+    prompt: 'Si quieres señalar el lugar exacto en el que TÚ te encuentras parado ("aquí"), ¿cuál demostrativo usas?',
+    options: ['そこ', 'ここ', 'あそこ', 'どこ'],
+    correctIndex: 1,
+    explanation: 'ここ indica el lugar del hablante ("aquí"). そこ es cerca del oyente y あそこ lejos de ambos.'
+  },
+  {
+    id: 'q-13',
+    lesson: 3,
+    type: 'grammar',
+    prompt: '¿Cuál es la forma MÁS CORTÉS y respetuosa de preguntar "¿Dónde está el ascensor?" a un cliente?',
+    options: [
+      'エレベーターは どこですか。',
+      'エレベーターは どちらですか。',
+      'エレベーターは どれですか。',
+      'エレベーターは なんかいですか。'
+    ],
+    correctIndex: 1,
+    explanation: 'どちら es la forma cortés de どこ empleada en atención al público y situaciones formales.'
+  },
+  {
+    id: 'q-14',
+    lesson: 3,
+    type: 'grammar',
+    prompt: '¿Cómo se pregunta en japonés "¿De qué país / fabricante es esta computadora?"?',
+    options: [
+      'これは だれの コンピューターですか。',
+      'これは なんの コンピューターですか。',
+      'これは どこの コンピューターですか。',
+      'これは いくらの コンピューターですか。'
+    ],
+    correctIndex: 2,
+    explanation: 'どこの [Producto] pregunta por el país de fabricación o por la compañía fabricante.'
+  },
+  {
+    id: 'q-15',
+    lesson: 3,
+    type: 'meaning',
+    prompt: '¿Qué cantidad en yenes expresa la cifra 「18,600円」 pronunciada 「いちまんはっせんろっぴゃくえん」?',
+    options: ['1.860 yenes', '18.600 yenes', '186.000 yenes', '180.600 yenes'],
+    correctIndex: 1,
+    explanation: '一万 (10.000) + 八千 (8.000) + 六百 (600) = 18.600 yenes.'
+  },
+  {
+    id: 'q-16',
+    lesson: 3,
+    type: 'fill_blank',
+    prompt: 'Al decidir comprar un producto que te acaba de enseñar el dependiente, ¿qué frase dices?',
+    options: [
+      'これを 見せてください。',
+      'これを ください。',
+      'これを どうぞ。',
+      'これを 違います。'
+    ],
+    correctIndex: 1,
+    explanation: '「これを ください」 significa "Déme este, por favor", cerrando la compra formalmente.'
+  },
+  {
+    id: 'q-17',
+    lesson: 3,
+    type: 'grammar',
+    prompt: 'Si te preguntan 「お国は どちらですか」, ¿qué te están preguntando?',
+    options: [
+      '¿A qué hora sale tu tren a Osaka?',
+      '¿De qué país es usted originario?',
+      '¿En qué piso está tu habitación?',
+      '¿Cuál es el precio de tu pasaporte?'
+    ],
+    correctIndex: 1,
+    explanation: 'お国 (país de usted con prefijo de cortesía) + どちらですか (¿dónde / cuál con cortesía).'
+  },
+  {
+    id: 'q-18',
+    lesson: 3,
+    type: 'audio',
+    prompt: 'Escucha el audio. ¿Qué lugar o dependencia se está indicando?',
+    audioText: 'しょくどうは ちかいっかいです。',
+    options: [
+      'El comedor está en el primer subsuelo (sótano 1).',
+      'La oficina está en el segundo piso.',
+      'La recepción está en el tercer piso.',
+      'Los baños están en la azotea.'
+    ],
+    correctIndex: 0,
+    explanation: '食堂 (しょくどう = comedor) + は + 地下1階 (ちかいっかい = sótano 1) + です.'
   }
+
 ];
 

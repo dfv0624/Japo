@@ -28,7 +28,7 @@ const TABS: TabItem[] = [
   // Práctica Gramatical
   { id: 'sentences', label: 'Construir Frases', jpLabel: '文を作る', icon: 'reorder', category: 'practica' },
   { id: 'particles', label: 'Reto Partículas', jpLabel: '助詞マスター', icon: 'adjust', category: 'practica' },
-  { id: 'demonstratives', label: 'これ・それ・あれ', jpLabel: '指示詞マップ', icon: 'explore', category: 'practica' },
+  { id: 'demonstratives', label: 'Demostrativos', jpLabel: '指示詞マップ', icon: 'explore', category: 'practica' },
 
   // Inmersión & Evaluación
   { id: 'dialogues', label: 'Diálogos Reales', jpLabel: '会話練習', icon: 'forum', category: 'inmersion' },
