@@ -4,6 +4,11 @@ import { SpeechService } from '../../services/speech.service';
 import { PARTICLE_EXERCISES } from '../../data/lessons-data';
 import { ParticleExercise } from '../../models/japanese.models';
 
+interface TextSegment {
+  text: string;
+  furigana?: string;
+}
+
 @Component({
   selector: 'app-particle-trainer',
   template: `
@@ -23,12 +28,42 @@ import { ParticleExercise } from '../../models/japanese.models';
         <!-- Sentence Display with Blank Spot -->
         <div class="sentence-box">
           <div class="jp-sentence-display jp-serif">
-            <span class="pre-text">{{ currentExercise().sentencePre }}</span>
+            <span class="pre-text">
+              @if (studyProgress.scriptMode() === 'hiragana') {
+                {{ currentExercise().sentencePreKana || currentExercise().sentencePre }}
+              } @else {
+                @for (seg of preSegments(); track $index) {
+                  @if (seg.furigana) {
+                    <ruby class="jp-ruby">{{ seg.text }}<rt class="particle-rt">{{ seg.furigana }}</rt></ruby>
+                  } @else {
+                    <span>{{ seg.text }}</span>
+                  }
+                }
+              }
+            </span>
             <span class="blank-slot" [class.filled]="selectedParticle() !== null" [class.correct]="isSubmitted() && isCorrect()" [class.wrong]="isSubmitted() && !isCorrect()">
               {{ selectedParticle() || '？' }}
             </span>
-            <span class="post-text">{{ currentExercise().sentencePost }}</span>
+            <span class="post-text">
+              @if (studyProgress.scriptMode() === 'hiragana') {
+                {{ currentExercise().sentencePostKana || currentExercise().sentencePost }}
+              } @else {
+                @for (seg of postSegments(); track $index) {
+                  @if (seg.furigana) {
+                    <ruby class="jp-ruby">{{ seg.text }}<rt class="particle-rt">{{ seg.furigana }}</rt></ruby>
+                  } @else {
+                    <span>{{ seg.text }}</span>
+                  }
+                }
+              }
+            </span>
           </div>
+
+          @if (studyProgress.showRomaji() && currentExercise().romaji) {
+            <div class="romaji-line jp-text">
+              {{ currentExercise().romaji }}
+            </div>
+          }
 
           <div class="es-translation">
             {{ currentExercise().translation }}
@@ -60,12 +95,23 @@ import { ParticleExercise } from '../../models/japanese.models';
                 <span class="material-symbols-outlined icon-inline">{{ isCorrect() ? 'check_circle' : 'cancel' }}</span>
                 {{ isCorrect() ? '¡Correcto!' : 'Incorrecto' }}
               </span>
-              <button 
-                type="button" 
-                class="audio-btn" 
-                (click)="playCompleteSentence()">
-                <span class="material-symbols-outlined">volume_up</span>
-              </button>
+              <div class="feedback-actions">
+                @if (!isCorrect()) {
+                  <button 
+                    type="button" 
+                    class="btn-retry-badge" 
+                    (click)="resetExercise()">
+                    <span class="material-symbols-outlined">restart_alt</span>
+                    Reintentar
+                  </button>
+                }
+                <button 
+                  type="button" 
+                  class="audio-btn" 
+                  (click)="playCompleteSentence()">
+                  <span class="material-symbols-outlined">volume_up</span>
+                </button>
+              </div>
             </div>
             <div class="feedback-body">
               <strong>Explicación:</strong> {{ currentExercise().explanation }}
@@ -75,34 +121,47 @@ import { ParticleExercise } from '../../models/japanese.models';
 
         <!-- Bottom Controls -->
         <div class="actions-row">
-          <button 
-            type="button" 
-            class="btn-secondary" 
-            (click)="prevExercise()" 
-            [disabled]="currentIndex() === 0">
-            <span class="material-symbols-outlined">arrow_back</span>
-            Anterior
-          </button>
+          <div class="actions-left">
+            <button 
+              type="button" 
+              class="btn-secondary" 
+              (click)="prevExercise()" 
+              [disabled]="currentIndex() === 0">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Anterior
+            </button>
+            <button 
+              type="button" 
+              class="btn-secondary btn-restart" 
+              (click)="resetExercise()" 
+              [disabled]="!isSubmitted() && selectedParticle() === null"
+              title="Reiniciar este ejercicio">
+              <span class="material-symbols-outlined">restart_alt</span>
+              Reiniciar
+            </button>
+          </div>
 
-          @if (!isSubmitted()) {
-            <button 
-              type="button" 
-              class="btn-primary" 
-              [disabled]="selectedParticle() === null" 
-              (click)="submitAnswer()">
-              <span class="material-symbols-outlined">done_all</span>
-              Comprobar
-            </button>
-          } @else {
-            <button 
-              type="button" 
-              class="btn-primary" 
-              (click)="nextExercise()"
-              [disabled]="currentIndex() >= filteredExercises().length - 1">
-              Siguiente partícula
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </button>
-          }
+          <div class="actions-right">
+            @if (!isSubmitted()) {
+              <button 
+                type="button" 
+                class="btn-primary" 
+                [disabled]="selectedParticle() === null" 
+                (click)="submitAnswer()">
+                <span class="material-symbols-outlined">done_all</span>
+                Comprobar
+              </button>
+            } @else {
+              <button 
+                type="button" 
+                class="btn-primary" 
+                (click)="nextExercise()"
+                [disabled]="currentIndex() >= filteredExercises().length - 1">
+                Siguiente partícula
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
@@ -172,6 +231,38 @@ import { ParticleExercise } from '../../models/japanese.models';
       justify-content: center;
       flex-wrap: wrap;
       gap: 0.35rem;
+      line-height: 1.6;
+    }
+
+    .pre-text, .post-text {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.15rem;
+    }
+
+    .jp-ruby {
+      display: inline-ruby;
+      ruby-align: center;
+      ruby-position: over;
+    }
+
+    .particle-rt {
+      font-family: var(--font-sans);
+      font-size: 0.5em;
+      font-weight: 600;
+      color: var(--text-secondary);
+      line-height: 1;
+      text-align: center;
+      user-select: none;
+    }
+
+    .romaji-line {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 0.65rem;
+      font-style: italic;
+      letter-spacing: 0.02em;
     }
 
     .blank-slot {
@@ -303,6 +394,44 @@ import { ParticleExercise } from '../../models/japanese.models';
       gap: 1rem;
     }
 
+    .actions-left, .actions-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-restart {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .feedback-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-retry-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-sm);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-retry-badge:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--accent-black);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
@@ -332,6 +461,34 @@ export class ParticleTrainerComponent {
     return this.selectedParticle() === this.currentExercise().correctParticle;
   });
 
+  private readonly kanjiFuriganaMap: Record<string, string> = {
+    '会社員': 'かいしゃいん',
+    '社員': 'しゃいん',
+    '医者': 'いしゃ',
+    '日本語': 'にほんご',
+    '辞書': 'じしょ',
+    '傘': 'かさ',
+    '本': 'ほん',
+    '自動車': 'じどうしゃ',
+    '食堂': 'しょくどう',
+    '靴': 'くつ',
+    '時計': 'とけい',
+    '見せて': 'みせて'
+  };
+
+  private parseSegments(text: string): TextSegment[] {
+    if (!text) return [];
+    const pattern = /(会社員|社員|医者|日本語|辞書|傘|本|自動車|食堂|靴|時計|見せて)/g;
+    const parts = text.split(pattern);
+    return parts.filter(p => p.length > 0).map(p => {
+      const furigana = this.kanjiFuriganaMap[p];
+      return furigana ? { text: p, furigana } : { text: p };
+    });
+  }
+
+  readonly preSegments = computed(() => this.parseSegments(this.currentExercise().sentencePre));
+  readonly postSegments = computed(() => this.parseSegments(this.currentExercise().sentencePost));
+
   selectParticle(p: string): void {
     if (this.isSubmitted()) return;
     this.selectedParticle.set(p);
@@ -351,6 +508,11 @@ export class ParticleTrainerComponent {
     const ex = this.currentExercise();
     const full = `${ex.sentencePre}${ex.correctParticle}${ex.sentencePost}`;
     this.speechService.speak(full);
+  }
+
+  resetExercise(): void {
+    this.selectedParticle.set(null);
+    this.isSubmitted.set(false);
   }
 
   nextExercise(): void {

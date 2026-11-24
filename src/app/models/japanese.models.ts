@@ -66,6 +66,9 @@ export interface ParticleExercise {
   lesson: 1 | 2 | 3;
   sentencePre: string;
   sentencePost: string;
+  sentencePreKana?: string;
+  sentencePostKana?: string;
+  romaji?: string;
   translation: string;
   correctParticle: string;
   options: string[];

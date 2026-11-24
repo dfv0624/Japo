@@ -116,43 +116,66 @@ import { SentenceBuilderExercise } from '../../models/japanese.models';
           </div>
         } @else if (checkStatus() === 'incorrect') {
           <div class="feedback-box error-feedback">
-            <div class="feedback-icon">
-              <span class="material-symbols-outlined icon-inline">cancel</span>
-              El orden no es el correcto todavía. Intenta reordenar los bloques.
+            <div class="feedback-header-row">
+              <span class="feedback-icon">
+                <span class="material-symbols-outlined icon-inline">cancel</span>
+                El orden no es el correcto todavía.
+              </span>
+              <button 
+                type="button" 
+                class="btn-retry-badge" 
+                (click)="resetExercise()">
+                <span class="material-symbols-outlined">restart_alt</span>
+                Reintentar
+              </button>
             </div>
+            <p class="error-tip">Toca "Reintentar" para ordenar los bloques de nuevo, o continúa al siguiente ejercicio.</p>
           </div>
         }
 
         <!-- Actions -->
         <div class="actions-bar">
-          <button 
-            type="button" 
-            class="btn-secondary"
-            (click)="prevExercise()"
-            [disabled]="currentIndex() === 0">
-            <span class="material-symbols-outlined">arrow_back</span>
-            Anterior
-          </button>
+          <div class="actions-left">
+            <button 
+              type="button" 
+              class="btn-secondary"
+              (click)="prevExercise()"
+              [disabled]="currentIndex() === 0">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Anterior
+            </button>
+            <button 
+              type="button" 
+              class="btn-secondary btn-restart"
+              (click)="resetExercise()"
+              [disabled]="constructedTokens().length === 0 && checkStatus() === 'idle'"
+              title="Reiniciar este ejercicio">
+              <span class="material-symbols-outlined">restart_alt</span>
+              Reiniciar
+            </button>
+          </div>
 
-          @if (checkStatus() !== 'correct') {
-            <button 
-              type="button" 
-              class="btn-primary"
-              [disabled]="constructedTokens().length === 0"
-              (click)="checkAnswer()">
-              <span class="material-symbols-outlined">done_all</span>
-              Comprobar respuesta
-            </button>
-          } @else {
-            <button 
-              type="button" 
-              class="btn-primary"
-              (click)="nextExercise()"
-              [disabled]="currentIndex() >= filteredExercises().length - 1">
-              Siguiente ejercicio
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </button>
-          }
+          <div class="actions-right">
+            @if (checkStatus() === 'idle') {
+              <button 
+                type="button" 
+                class="btn-primary"
+                [disabled]="constructedTokens().length === 0"
+                (click)="checkAnswer()">
+                <span class="material-symbols-outlined">done_all</span>
+                Comprobar respuesta
+              </button>
+            } @else {
+              <button 
+                type="button" 
+                class="btn-primary"
+                (click)="nextExercise()"
+                [disabled]="currentIndex() >= filteredExercises().length - 1">
+                Siguiente ejercicio
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
@@ -407,6 +430,51 @@ import { SentenceBuilderExercise } from '../../models/japanese.models';
       margin-top: 0.5rem;
     }
 
+    .actions-left, .actions-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-restart {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .feedback-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-retry-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-sm);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-retry-badge:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--accent-black);
+    }
+
+    .error-tip {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
@@ -467,6 +535,10 @@ export class SentenceBuilderComponent {
   }
 
   resetConstruction(): void {
+    this.initExercise();
+  }
+
+  resetExercise(): void {
     this.initExercise();
   }
 

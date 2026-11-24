@@ -170,9 +170,20 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
                 <span class="material-symbols-outlined icon-inline">{{ isCorrect() ? 'check_circle' : 'cancel' }}</span>
                 {{ isCorrect() ? '¡Respuesta Correcta!' : 'No es el demostrativo correcto' }}
               </span>
-              <button type="button" class="audio-btn" (click)="speechService.speak(currentScenario().correctAnswer)">
-                <span class="material-symbols-outlined">volume_up</span>
-              </button>
+              <div class="feedback-header-actions">
+                @if (!isCorrect()) {
+                  <button 
+                    type="button" 
+                    class="btn-retry-badge" 
+                    (click)="resetScenario()">
+                    <span class="material-symbols-outlined">restart_alt</span>
+                    Reintentar
+                  </button>
+                }
+                <button type="button" class="audio-btn" (click)="speechService.speak(currentScenario().correctAnswer)">
+                  <span class="material-symbols-outlined">volume_up</span>
+                </button>
+              </div>
             </div>
             <p class="feedback-explanation">
               <strong>Regla Minna no Nihongo:</strong> {{ currentScenario().explanation }}
@@ -182,34 +193,47 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
 
         <!-- Actions -->
         <div class="stage-footer">
-          <button 
-            type="button" 
-            class="btn-secondary" 
-            (click)="prevScenario()" 
-            [disabled]="currentIndex() === 0">
-            <span class="material-symbols-outlined">arrow_back</span>
-            Anterior
-          </button>
+          <div class="actions-left">
+            <button 
+              type="button" 
+              class="btn-secondary" 
+              (click)="prevScenario()" 
+              [disabled]="currentIndex() === 0">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Anterior
+            </button>
+            <button 
+              type="button" 
+              class="btn-secondary btn-restart" 
+              (click)="resetScenario()" 
+              [disabled]="!isSubmitted() && selectedOption() === null"
+              title="Reiniciar este ejercicio">
+              <span class="material-symbols-outlined">restart_alt</span>
+              Reiniciar
+            </button>
+          </div>
 
-          @if (!isSubmitted()) {
-            <button 
-              type="button" 
-              class="btn-primary" 
-              [disabled]="selectedOption() === null" 
-              (click)="submitChoice()">
-              <span class="material-symbols-outlined">done</span>
-              Confirmar elección
-            </button>
-          } @else {
-            <button 
-              type="button" 
-              class="btn-primary" 
-              (click)="nextScenario()"
-              [disabled]="currentIndex() >= scenarios().length - 1">
-              Siguiente escenario
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </button>
-          }
+          <div class="actions-right">
+            @if (!isSubmitted()) {
+              <button 
+                type="button" 
+                class="btn-primary" 
+                [disabled]="selectedOption() === null" 
+                (click)="submitChoice()">
+                <span class="material-symbols-outlined">done</span>
+                Confirmar elección
+              </button>
+            } @else {
+              <button 
+                type="button" 
+                class="btn-primary" 
+                (click)="nextScenario()"
+                [disabled]="currentIndex() >= scenarios().length - 1">
+                Siguiente escenario
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
@@ -496,6 +520,44 @@ import { DemonstrativeScenario } from '../../models/japanese.models';
       gap: 1rem;
     }
 
+    .actions-left, .actions-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-restart {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .feedback-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-retry-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-sm);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-retry-badge:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--accent-black);
+    }
+
     @keyframes popIn {
       from { transform: scale(0.85); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
@@ -546,6 +608,11 @@ export class DemonstrativeTrainerComponent {
     if (correct) {
       this.speechService.speak(this.currentScenario().correctAnswer);
     }
+  }
+
+  resetScenario(): void {
+    this.selectedOption.set(null);
+    this.isSubmitted.set(false);
   }
 
   nextScenario(): void {
