@@ -1,0 +1,339 @@
+.word-lab-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lab-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.lab-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lab-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.4rem;
+}
+
+.lab-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.kosoado-builder {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.builder-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.selector-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.col-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.option-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.builder-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-medium);
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.builder-btn:hover:not(.active) {
+  border-color: var(--accent-black);
+  background-color: var(--bg-primary);
+}
+
+.builder-btn.active {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.btn-main {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.btn-sub {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.kosoado-result,
+.particle-detail {
+  background-color: var(--bg-subtle);
+  border: 1.5px solid var(--accent-black);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.result-top,
+.particle-detail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.result-word {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.result-romaji {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.result-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.result-meaning {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-rule,
+.particle-summary {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.result-example-box {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+}
+
+.ex-jp {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ex-kana {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.ex-es {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.particle-tabs {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.particle-tab {
+  min-width: 58px;
+  height: 52px;
+  font-size: 1.45rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-medium);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.particle-tab:hover:not(.active) {
+  border-color: var(--accent-black);
+  background-color: var(--bg-secondary);
+}
+
+.particle-tab.active {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.particle-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.particle-badges {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.formula-pill {
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-primary);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-primary);
+}
+
+.mistake-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.recipe-card {
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background-color: var(--bg-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.recipe-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recipe-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.recipe-pattern {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  width: fit-content;
+}
+
+.recipe-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.recipe-blocks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.recipe-block,
+.recipe-result {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-medium);
+  background-color: var(--bg-primary);
+}
+
+.recipe-result {
+  background-color: var(--accent-black);
+  border-color: var(--accent-black);
+  color: var(--text-inverted);
+}
+
+.block-value,
+.result-jp {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.block-role,
+.result-es {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.block-plus {
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .builder-columns,
+  .recipes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

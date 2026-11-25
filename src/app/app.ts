@@ -10,6 +10,7 @@ import { DialogueTrainerComponent } from './components/dialogue-trainer/dialogue
 import { QuizComponent } from './components/quiz/quiz.component';
 import { GrammarGuideComponent } from './components/grammar-guide/grammar-guide.component';
 import { DictionaryComponent } from './components/dictionary/dictionary.component';
+import { WritingPracticeComponent } from './components/writing-practice/writing-practice.component';
 import { StudyProgressService } from './services/study-progress.service';
 
 @Component({
@@ -19,6 +20,7 @@ import { StudyProgressService } from './services/study-progress.service';
     NavigationTabsComponent,
     KanaTrainerComponent,
     FlashcardsComponent,
+    WritingPracticeComponent,
     SentenceBuilderComponent,
     ParticleTrainerComponent,
     DemonstrativeTrainerComponent,

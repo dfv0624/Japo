@@ -1,0 +1,427 @@
+<div class="writing-wrapper">
+  <!-- Module Header -->
+  <div class="module-header">
+    <div>
+      <span class="badge">Taller de Escritura • 書く練習</span>
+      <h2 class="module-title">Escribe, Traza y Arma Palabras</h2>
+      <p class="module-desc">
+        Practica escribiendo con teclado inteligente (Romaji → Hiragana), traza en el cuaderno japonés y domina これ・それ・あれ y las partículas.
+      </p>
+    </div>
+
+    <div class="header-stats">
+      <div class="stat-pill">
+        <span class="material-symbols-outlined">fact_check</span>
+        <span>{{ sessionCorrect() }} / {{ sessionTotal() }} aciertos</span>
+      </div>
+      @if (filteredExercises().length > 0 && activeMode() !== 'lab') {
+        <div class="exercise-progress">
+          {{ currentIndex() + 1 }} / {{ filteredExercises().length }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Sub-mode Navigation -->
+  <div class="mode-switcher" role="tablist" aria-label="Modos de práctica de escritura">
+    <button
+      type="button"
+      role="tab"
+      class="mode-tab-btn"
+      [class.active]="activeMode() === 'keyboard'"
+      [attr.aria-selected]="activeMode() === 'keyboard'"
+      (click)="setMode('keyboard')">
+      <span class="material-symbols-outlined">keyboard</span>
+      <span>Escribir y Validar</span>
+    </button>
+    <button
+      type="button"
+      role="tab"
+      class="mode-tab-btn"
+      [class.active]="activeMode() === 'draw'"
+      [attr.aria-selected]="activeMode() === 'draw'"
+      (click)="setMode('draw')">
+      <span class="material-symbols-outlined">draw</span>
+      <span>Cuaderno de Trazo</span>
+    </button>
+    <button
+      type="button"
+      role="tab"
+      class="mode-tab-btn"
+      [class.active]="activeMode() === 'lab'"
+      [attr.aria-selected]="activeMode() === 'lab'"
+      (click)="setMode('lab')">
+      <span class="material-symbols-outlined">account_tree</span>
+      <span>Cómo Armar Palabras</span>
+    </button>
+  </div>
+
+  <!-- Topic Category Filter (for keyboard and draw modes) -->
+  @if (activeMode() !== 'lab') {
+    <div class="category-filter-bar" role="group" aria-label="Filtrar ejercicios por tema">
+      <span class="filter-title">Tema:</span>
+      <div class="filter-pills">
+        @for (cat of categoryOptions; track cat.id) {
+          <button
+            type="button"
+            class="cat-pill"
+            [class.active]="selectedCategory() === cat.id"
+            (click)="setCategory(cat.id)">
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- MODE 3: WORD & PARTICLE LAB -->
+  @if (activeMode() === 'lab') {
+    <app-word-lab (practiceTopic)="onLabPracticeTopic($event)" />
+  } @else if (currentExercise(); as exercise) {
+    <!-- MODE 1: KEYBOARD + IME WRITING PRACTICE -->
+    @if (activeMode() === 'keyboard') {
+      <div class="writing-card">
+        <!-- Exercise Prompt -->
+        <div class="prompt-header">
+          <div class="prompt-tags">
+            <span class="badge">Lección {{ exercise.lesson }}</span>
+            <span class="badge">{{ categoryLabel() }}</span>
+          </div>
+          <button
+            type="button"
+            class="audio-btn"
+            (click)="speechService.speak(exercise.targetKana)"
+            title="Escuchar pronunciación objetivo"
+            aria-label="Escuchar pronunciación objetivo">
+            <span class="material-symbols-outlined">volume_up</span>
+          </button>
+        </div>
+
+        <div class="prompt-box">
+          <span class="prompt-label">Escribe esto en japonés:</span>
+          <div class="prompt-text">{{ exercise.promptEs }}</div>
+          @if (exercise.contextHint) {
+            <p class="context-hint">{{ exercise.contextHint }}</p>
+          }
+        </div>
+
+        <!-- IME & Input Area -->
+        <div class="input-section">
+          <div class="input-toolbar">
+            <label for="writing-answer-input" class="input-label">
+              Tu respuesta en japonés:
+            </label>
+            <div class="ime-controls">
+              <button
+                type="button"
+                class="toggle-chip"
+                [class.active]="imeEnabled()"
+                (click)="toggleIme()"
+                [attr.aria-pressed]="imeEnabled()"
+                title="Convierte automáticamente lo que teclees en Romaji a Hiragana">
+                <span class="material-symbols-outlined">translate</span>
+                IME Romaji → かな: {{ imeEnabled() ? 'ON' : 'OFF' }}
+              </button>
+              <button
+                type="button"
+                class="toggle-chip"
+                [class.active]="showKanaKeypad()"
+                (click)="toggleKanaKeypad()"
+                [attr.aria-pressed]="showKanaKeypad()">
+                <span class="material-symbols-outlined">dialpad</span>
+                Teclado Hiragana
+              </button>
+            </div>
+          </div>
+
+          <div class="input-row">
+            <input
+              #writingInput
+              id="writing-answer-input"
+              type="text"
+              class="jp-input jp-serif"
+              [value]="userInput()"
+              (input)="onTextInput($event)"
+              (keydown)="onInputKeydown($event)"
+              placeholder="Ej: kore ha hon desu (o usa los bloques debajo)"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false" />
+            @if (userInput().length > 0) {
+              <button
+                type="button"
+                class="clear-input-btn"
+                (click)="clearInput()"
+                aria-label="Borrar texto">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            }
+          </div>
+
+          @if (userInput().trim().length > 0 && imePreview() !== userInput()) {
+            <div class="ime-preview-line">
+              <span class="preview-tag">Vista previa en Hiragana:</span>
+              <span class="preview-kana jp-serif">{{ imePreview() }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Quick Insert Chips: Particles, Ko-So-A-Do & Endings -->
+        <div class="quick-chips-panel">
+          <div class="chip-group">
+            <span class="chip-group-label">Partículas:</span>
+            <div class="chip-row">
+              @for (p of particleSnippets; track p) {
+                <button
+                  type="button"
+                  class="snippet-chip snippet-particle jp-serif"
+                  (click)="insertSnippet(p)">
+                  {{ p }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="chip-group">
+            <span class="chip-group-label">Ko-So-A-Do:</span>
+            <div class="chip-row">
+              @for (d of demonstrativeSnippets; track d) {
+                <button
+                  type="button"
+                  class="snippet-chip jp-serif"
+                  (click)="insertSnippet(d)">
+                  {{ d }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="chip-group">
+            <span class="chip-group-label">Cierres:</span>
+            <div class="chip-row">
+              @for (end of endingSnippets; track end) {
+                <button
+                  type="button"
+                  class="snippet-chip jp-serif"
+                  (click)="insertSnippet(end)">
+                  {{ end }}
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Virtual Hiragana Keypad -->
+        @if (showKanaKeypad()) {
+          <div class="kana-keypad" role="region" aria-label="Teclado rápido de Hiragana">
+            <div class="keypad-header">
+              <span>Toca cualquier carácter Hiragana para insertarlo:</span>
+              <div class="keypad-actions">
+                <button type="button" class="key-util-btn" (click)="insertSnippet(' ')">Espacio</button>
+                <button type="button" class="key-util-btn" (click)="backspaceInput()">← Borrar</button>
+              </div>
+            </div>
+            <div class="keypad-rows">
+              @for (row of keypadRows; track row.label) {
+                <div class="keypad-row">
+                  <span class="row-tag">{{ row.label }}</span>
+                  <div class="row-keys">
+                    @for (ch of row.chars; track ch) {
+                      <button
+                        type="button"
+                        class="kana-key jp-serif"
+                        (click)="insertSnippet(ch)">
+                        {{ ch }}
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Progressive Hints -->
+        @if (hintLevel() > 0) {
+          <div class="hint-drawer" aria-live="polite">
+            <div class="hint-row">
+              <strong>Fórmula:</strong>
+              <span class="formula-code jp-serif">{{ exercise.formula }}</span>
+            </div>
+            @if (hintLevel() >= 2) {
+              <div class="hint-row">
+                <strong>Romaji:</strong>
+                <span>{{ exercise.targetRomaji }}</span>
+              </div>
+            }
+            @if (hintLevel() >= 3) {
+              <div class="hint-row">
+                <strong>Hiragana completo:</strong>
+                <span class="jp-serif">{{ exercise.targetKana }}</span>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Evaluation Feedback + Block-by-Block Anatomy -->
+        @if (evaluation(); as evalRes) {
+          <div
+            class="feedback-panel"
+            [class.is-correct]="evalRes.isCorrect"
+            [class.is-wrong]="!evalRes.isCorrect"
+            aria-live="polite">
+            <div class="feedback-top">
+              <span class="feedback-status">
+                <span class="material-symbols-outlined">
+                  {{ evalRes.isCorrect ? 'check_circle' : 'info' }}
+                </span>
+                {{ evalRes.isCorrect ? '¡Correcto! 正解' : 'Revisa este detalle' }}
+              </span>
+              <div class="feedback-top-actions">
+                <button
+                  type="button"
+                  class="btn-outline"
+                  (click)="practiceInCanvas()">
+                  <span class="material-symbols-outlined">draw</span>
+                  Practicar trazo
+                </button>
+                <button
+                  type="button"
+                  class="audio-btn"
+                  (click)="speechService.speak(exercise.targetKana)"
+                  aria-label="Escuchar respuesta correcta">
+                  <span class="material-symbols-outlined">volume_up</span>
+                </button>
+              </div>
+            </div>
+
+            <p class="feedback-msg">{{ evalRes.hintMessage }}</p>
+
+            @if (evalRes.isCorrect) {
+              <div class="answer-reveal">
+                <span class="reveal-jp jp-serif">{{ exercise.targetJp }}</span>
+                <span class="reveal-kana">{{ exercise.targetKana }} · {{ exercise.targetRomaji }}</span>
+              </div>
+            }
+
+            <!-- Anatomía bloque por bloque -->
+            <div class="breakdown-section">
+              <div class="breakdown-title">Cómo se arma paso a paso:</div>
+              <div class="breakdown-grid">
+                @for (part of exercise.breakdown; track $index) {
+                  <div class="breakdown-chip" [class.is-particle]="part.highlight === 'particle'">
+                    <span class="bd-text jp-serif">{{ part.text }}</span>
+                    @if (part.kana !== part.text) {
+                      <span class="bd-kana">{{ part.kana }}</span>
+                    }
+                    <span class="bd-romaji">{{ part.romaji }}</span>
+                    <span class="bd-role">{{ part.role }}</span>
+                    <span class="bd-meaning">{{ part.meaning }}</span>
+                  </div>
+                }
+              </div>
+              <p class="writing-tip">
+                <strong>Tip de escritura:</strong> {{ exercise.writingTip }}
+              </p>
+            </div>
+          </div>
+        }
+
+        <!-- Bottom Action Bar -->
+        <div class="actions-bar">
+          <div class="actions-left">
+            <button
+              type="button"
+              class="btn-secondary"
+              [disabled]="currentIndex() === 0"
+              (click)="prevExercise()">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Anterior
+            </button>
+            <button
+              type="button"
+              class="btn-secondary"
+              [disabled]="hintLevel() >= 3"
+              (click)="revealNextHint()">
+              <span class="material-symbols-outlined">lightbulb</span>
+              {{ hintLevel() === 0 ? 'Ver pista' : hintLevel() === 1 ? 'Ver Romaji' : hintLevel() === 2 ? 'Ver Hiragana' : 'Pista completa' }}
+            </button>
+          </div>
+
+          <div class="actions-right">
+            @if (!evaluation()?.isCorrect) {
+              <button
+                type="button"
+                class="btn-primary"
+                [disabled]="userInput().trim().length === 0"
+                (click)="checkAnswer()">
+                <span class="material-symbols-outlined">done_all</span>
+                Comprobar escritura
+              </button>
+            } @else {
+              <button
+                type="button"
+                class="btn-primary"
+                [disabled]="currentIndex() >= filteredExercises().length - 1"
+                (click)="nextExercise()">
+                Siguiente ejercicio
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- MODE 2: HANDWRITING CANVAS PRACTICE -->
+    @if (activeMode() === 'draw') {
+      <div class="writing-card">
+        <div class="prompt-header">
+          <div class="prompt-tags">
+            <span class="badge">Lección {{ exercise.lesson }}</span>
+            <span class="badge">{{ categoryLabel() }}</span>
+          </div>
+          <button
+            type="button"
+            class="btn-outline"
+            (click)="setMode('keyboard')">
+            <span class="material-symbols-outlined">keyboard</span>
+            Volver a escribir con teclado
+          </button>
+        </div>
+
+        <app-writing-canvas
+          [targetKana]="exercise.targetKana"
+          [targetRomaji]="exercise.targetRomaji"
+          [targetMeaning]="exercise.promptEs" />
+
+        <div class="actions-bar">
+          <button
+            type="button"
+            class="btn-secondary"
+            [disabled]="currentIndex() === 0"
+            (click)="prevExercise()">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Ejercicio anterior
+          </button>
+          <button
+            type="button"
+            class="btn-primary"
+            [disabled]="currentIndex() >= filteredExercises().length - 1"
+            (click)="nextExercise()">
+            Siguiente ejercicio
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="empty-state-card">
+      <p>No hay ejercicios de escritura para esta combinación de lección y tema.</p>
+      <button type="button" class="btn-primary" (click)="setCategory('all')">
+        Ver todos los temas
+      </button>
+    </div>
+  }
+</div>
+

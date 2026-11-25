@@ -134,3 +134,46 @@ export interface UserStats {
   streakDays: number;
 }
 
+export type WritingCategory = 'kosoado' | 'particles' | 'word_building' | 'sentences';
+
+export interface WritingBreakdownPart {
+  text: string;
+  kana: string;
+  romaji: string;
+  role: string;
+  meaning: string;
+  highlight?: 'demonstrative' | 'particle' | 'copula' | 'affix' | 'noun';
+}
+
+export interface WritingExercise {
+  id: string;
+  lesson: 1 | 2 | 3;
+  category: WritingCategory;
+  difficulty: 1 | 2 | 3;
+  promptEs: string;
+  contextHint?: string;
+  formula: string;
+  targetJp: string;
+  targetKana: string;
+  targetRomaji: string;
+  acceptedAnswers: string[];
+  breakdown: WritingBreakdownPart[];
+  writingTip: string;
+  focusParticle?: 'は' | 'も' | 'の' | 'か' | 'を';
+  focusDemonstrative?: string;
+}
+
+export interface WritingEvaluationResult {
+  isCorrect: boolean;
+  normalizedInput: string;
+  feedbackType:
+    | 'exact'
+    | 'kana_accepted'
+    | 'particle_wa_error'
+    | 'particle_wo_error'
+    | 'demonstrative_confusion'
+    | 'missing_question_ka'
+    | 'mismatch';
+  hintMessage: string;
+}
+

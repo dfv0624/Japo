@@ -26,6 +26,7 @@ const TABS: TabItem[] = [
   { id: 'dictionary', label: 'Vocabulario', jpLabel: '語彙リスト', icon: 'translate', category: 'fundamentos' },
 
   // Práctica Gramatical
+  { id: 'writing', label: 'Práctica de Escritura', jpLabel: '書く練習', icon: 'edit_note', category: 'practica' },
   { id: 'sentences', label: 'Construir Frases', jpLabel: '文を作る', icon: 'reorder', category: 'practica' },
   { id: 'particles', label: 'Reto Partículas', jpLabel: '助詞マスター', icon: 'adjust', category: 'practica' },
   { id: 'demonstratives', label: 'Demostrativos', jpLabel: '指示詞マップ', icon: 'explore', category: 'practica' },
@@ -104,10 +105,10 @@ const TABS: TabItem[] = [
             class="all-modules-pill-btn"
             [class.active]="isAllModulesOpen()"
             (click)="toggleAllModules()"
-            title="Ver los 9 módulos de estudio"
+            [attr.title]="'Ver los ' + totalTabsCount + ' módulos de estudio'"
             aria-label="Ver todos los módulos">
             <span class="material-symbols-outlined">apps</span>
-            <span>Todos (9)</span>
+            <span>Todos ({{ totalTabsCount }})</span>
           </button>
         </div>
       </div>
@@ -169,6 +170,7 @@ const TABS: TabItem[] = [
 })
 export class NavigationTabsComponent {
   protected readonly studyProgress = inject(StudyProgressService);
+  readonly totalTabsCount = TABS.length;
 
   readonly categories: CategoryDef[] = [
     {
@@ -183,7 +185,7 @@ export class NavigationTabsComponent {
       label: 'Práctica Gramatical',
       jpLabel: '文法・練習',
       icon: 'extension',
-      desc: 'Frases, partículas y demostrativos'
+      desc: 'Escritura, frases, partículas y demostrativos'
     },
     {
       id: 'inmersion',

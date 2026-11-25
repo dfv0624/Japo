@@ -4,6 +4,7 @@ import { DisplayMode } from '../models/japanese.models';
 export type ActiveTab =
   | 'kana'
   | 'flashcards'
+  | 'writing'
   | 'sentences'
   | 'particles'
   | 'demonstratives'
